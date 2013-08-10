@@ -1,6 +1,6 @@
 @echo off
 cls
-cd src
+cd euler
 set i=1
 
 :start

@@ -178,8 +178,8 @@ def problem_58(length=None):
         for i in range(length):
             pass    
 
-def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):
-    ciphertext=list(next(data.openfile('cipher1.txt')).strip().split(','))     
+def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):    
+    ciphertext=list(data.openfile('cipher1.txt').strip().split(','))     
     #ciphertext=encipher('leijiaominabc','zzz')
     #log.info(encipher('leijiaominabc','zzz'))
     #log.info(ciphertext)

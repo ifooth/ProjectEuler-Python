@@ -1,9 +1,17 @@
+import os
+
 from distutils.core import setup
+
+packages, data_files = [], []
+  
+with open('README.md') as fp:
+    long_description = fp.read()
 
 setup(
     name='project-euler-python',
     version='0.0.3',
     description='project euler problem solve by python',
+    long_description=long_description,
     author='Joe Lei',
     author_email='thezero12@hotmail.com',
     url='http://ifooth.com',
