@@ -1,6 +1,7 @@
 Project-Euler
 =============
-
+[![Build status](https://travis-ci.org/ifooth/project-euler-python.png?branch=master)](https://travis-ci.org/ifooth/project-euler-python)
+[![Coverage Status](https://coveralls.io/repos/ifooth/project-euler-python/badge.png)](https://coveralls.io/r/ifooth/project-euler-python)
  Introduction
 -------------
 http://projecteuler.net/
