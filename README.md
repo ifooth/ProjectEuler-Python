@@ -1,6 +1,6 @@
 Project-Euler
 =============
-
+![Build status](https://travis-ci.org/ifooth/project-euler-python.png?branch=master)
  Introduction
 -------------
 http://projecteuler.net/
