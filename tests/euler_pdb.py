@@ -1,7 +1,7 @@
 '''
 Created on Jun 12, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
 import pdb
 import euler

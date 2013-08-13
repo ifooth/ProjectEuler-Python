@@ -4,7 +4,7 @@ python:
 install:
   - pip install coveralls
 script:
-  - coverage run --source=euler setup.py test
+  - coverage run --source=euler, tests runtests.py
   - coverage report -m
 after_success:
   - coveralls

@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     author='Joe Lei',
     author_email='thezero12@hotmail.com',
-    url='http://ifooth.com',
+    url='https://github.com/ifooth/project-euler-python',
     packages=['euler'],
     classifiers = [
         'Development Status :: 4 - Beta',

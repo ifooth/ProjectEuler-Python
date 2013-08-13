@@ -1,7 +1,7 @@
 '''
 Created on Jun 12, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
 import cProfile
 import pstats
@@ -21,4 +21,5 @@ if __name__=="__main__":
     #euler_profile()
     import time
     for i in range(10,1000):
+        pass
         

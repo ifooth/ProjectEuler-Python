@@ -1,7 +1,7 @@
 '''
 Created on Jun 12, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
 import unittest
 import euler
@@ -13,4 +13,4 @@ class Test(unittest.TestCase):
         pass
 
 if __name__ == "__main__":    
-    unittest.main(_euler.main())
+    unittest.main(euler)
