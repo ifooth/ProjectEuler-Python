@@ -233,7 +233,7 @@ def problem_45():
     return i_iter.__next__()
     """
     
-def problem_46()->"backlog=1":
+def problem_46():
     n = 5
     f = 1
     primes = set()

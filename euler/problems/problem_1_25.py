@@ -77,7 +77,7 @@ def problem_9():
 def problem_10():
     return sum(i for i in range(3,2000000,2) if ext.XInt(i).isPrime())+2
 
-def problem_11()->"Backlog==1":
+def problem_11():
     grid=[map(int,i.split()) for i in data.problem11.strip().splitlines()]
     diffs=[(0, +1), (+1, 0), (+1, +1), (+1, -1)]
     sr,sc = len(grid),len(grid[0])
@@ -140,7 +140,7 @@ def problem_17():
     i_sum+=d_word[1]+d_word[1000] #1000
     return len(i_sum)
 
-def problem_18()->"Backlog==2":
+def problem_18():
     i_str=[map(int,i.split()) for i in data.problem18.strip().splitlines()]            
     itertools.product([0,+1],repeat=len(i_str)-1)
 

@@ -7,7 +7,7 @@ Created on May 26, 2012
 import logging
 import logging.config
 
-logging.config.fileConfig('../etc/logging.ini')
+#logging.config.fileConfig('../etc/logging.ini')
 log=logging.getLogger('euler')
 
 from problems import Problem
