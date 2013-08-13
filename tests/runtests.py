@@ -17,6 +17,7 @@ class Test_25(unittest.TestCase):
 
     def test_problem_1(self):
         self.assertEqual(233168, Problem(1).run())
+        self.assertEqual(4613732, Problem(2).run())
 
 if __name__ == "__main__":   
     unittest.main()

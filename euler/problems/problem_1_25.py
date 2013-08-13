@@ -1,7 +1,7 @@
 '''
 Created on Jun 7, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
 
 
@@ -13,15 +13,22 @@ import datetime
 
 from lib import *
 
+
 def problem_1():
-    return sum(i for i in range(1000) if i%3==0 or i%5==0)
+    return sum(i for i in range(1000) if i % 3 == 0 or i % 5 == 0)
+
 
 def problem_2():
-    l_list=[1,2]
-    while l_list[-1]<4000000:
-        l_list.append(l_list[-1]+l_list[-2]) 
-    #print(l_list[:-1])   
-    return sum(i for i in l_list[:-1] if i%2==0)
+    Fibonacci = [1, 2]
+    while Fibonacci[-1] < 4**10000:
+        Fibonacci.append(Fibonacci[-1] + Fibonacci[-2])     
+    return sum(i for i in Fibonacci[:-1] if i % 2 == 0)
+
+def Fibonacci(max):
+    a, b = 0, 1
+    while a < max:
+        yield a
+        a, b = b, a + b
 
 def problem_3():       
     return max(ext.XInt(600851475143).factors())
