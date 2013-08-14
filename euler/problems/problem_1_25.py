@@ -20,7 +20,7 @@ def problem_1():
 
 def problem_2():
     Fibonacci = [1, 2]
-    while Fibonacci[-1] < 4**10000:
+    while Fibonacci[-1] < 4000000:
         Fibonacci.append(Fibonacci[-1] + Fibonacci[-2])     
     return sum(i for i in Fibonacci[:-1] if i % 2 == 0)
 
