@@ -3,11 +3,12 @@
 Created on Jun 12, 2012
 
 @author: Joe Lei
-性能测试
+覆盖测试
+标准库版coverage
 '''
+
 import logging
-import cProfile
-import pstats
+import trace
 import os.path
 import sys
 
@@ -17,10 +18,12 @@ sys.path.append(path)
 from problems import Problem
 
 log=logging.getLogger(__file__)
-    
-def euler_profile():
-    cProfile.run('Problem(2).run()')
 
-if __name__=="__main__":
-    euler_profile()
-        
+def test():
+    Problem(2).run()
+
+if __name__ == '__main__':
+    tracer = trace.Trace(trace=0, count=1)
+    tracer.run('test()')
+    r = tracer.results()    
+    r.write_results(summary=True)

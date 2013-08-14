@@ -1,10 +1,12 @@
+# encoding=utf-8
 '''
 Created on Jun 12, 2012
 
 @author: Joe Lei
+时间测试
 '''
 import logging
-import timeit
+from timeit import Timer
 import os.path
 import sys
 
@@ -15,9 +17,11 @@ from problems import Problem
 
 log=logging.getLogger(__file__)
 
-def euler_timeit():
-    log.info(timeit.Timer(lambda:Problem(2).run()).timeit(1))    
+def euler_test():
+    Problem(2).run()  
 
-if __name__=="__main__":    
-    euler_timeit()
+if __name__=="__main__":   
+    
+    t = Timer('euler_test()', setup='from __main__ import euler_test')
+    print(t.timeit())
         
