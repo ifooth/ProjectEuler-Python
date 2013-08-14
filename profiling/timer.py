@@ -6,6 +6,7 @@ Created on Jun 12, 2012
 时间测试
 '''
 import logging
+import argparse
 from timeit import Timer
 import os.path
 import sys
@@ -17,11 +18,10 @@ from problems import Problem
 
 log=logging.getLogger(__file__)
 
-def euler_test():
-    Problem(2).run()  
+def run_timer(num):
+    Problem(num).run()  
 
-if __name__=="__main__":   
-    
-    t = Timer('euler_test()', setup='from __main__ import euler_test')
+if __name__=="__main__":
+    t = Timer('run_timer(2)', setup='from __main__ import run_timer')
     print(t.timeit())
         

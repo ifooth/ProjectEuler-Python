@@ -11,7 +11,7 @@ import operator
 import math
 import datetime
 
-from lib import *
+from euler.lib import *
 
 
 def problem_1():

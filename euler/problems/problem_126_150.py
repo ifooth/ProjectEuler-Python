@@ -1,9 +1,10 @@
 '''
 Created on 2012-7-18
 
-@author: botwave
+@author: Joe Lei
 '''
-from lib import *
+from euler.lib import *
+
 def problem_134():
     s=[i for i in ext.XInt(1000000).sievePrime() if i>3]
     #s.append(1000003)

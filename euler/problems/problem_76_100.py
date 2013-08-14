@@ -8,7 +8,7 @@ import decimal
 import logging
 from collections import OrderedDict
 
-from lib import *
+from euler.lib import *
 
 log = logging.getLogger(__name__)
 

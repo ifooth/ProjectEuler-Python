@@ -7,11 +7,11 @@ Created on 2012-7-18
 __all__=["problem_1_25","problem_26_50","problem_51_75","problem_76_100",\
          "problem_101_125","problem_125_150","problem_151_175","problem_176_200"]         
 
-from problems import problem_1_25
-from problems import problem_26_50
-from problems import problem_51_75
-from problems import problem_76_100
-from problems import problem_101_125
+from euler.problems import problem_1_25
+from euler.problems import problem_26_50
+from euler.problems import problem_51_75
+from euler.problems import problem_76_100
+from euler.problems import problem_101_125
 import logging
 log=logging.getLogger(__name__)
 

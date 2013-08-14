@@ -1,9 +1,9 @@
 '''
 Created on Jun 7, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
-from lib import *
+from euler.lib import *
 import itertools
 import fractions
 import collections

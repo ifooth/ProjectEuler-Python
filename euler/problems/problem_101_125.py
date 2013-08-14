@@ -1,9 +1,10 @@
 '''
 Created on Jun 9, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
-from lib import *
+from euler.lib import *
+
 def problem_111():
     a=[i for i in ext.XInt(10000).sievePrime() if i>1000]
     import collections    

@@ -8,8 +8,8 @@ Created on Jun 7, 2012
 import logging
 log=logging.getLogger(__name__)
 
-from lib.ext import intx,fractionx
-from lib import data
+from euler.lib.ext import intx,fractionx
+from euler.lib import data
 import math
 import itertools
 import string
