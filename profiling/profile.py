@@ -18,8 +18,9 @@ from problems import Problem
 
 log=logging.getLogger(__file__)
     
-def euler_profile():
-    cProfile.run('Problem(2).run()')
+def euler_profile(num=1):
+    p = 'Problem(%s).run()' % num
+    cProfile.run(p)
 
 if __name__=="__main__":
     euler_profile()
