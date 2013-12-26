@@ -56,3 +56,7 @@ Eclipse Juno+PyDev 默认编码
 ----------
 1. _表示内部变量与函数 可以认为protected
 2. __表示私有变量与函数 可以认为private
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ifooth/project-euler-python/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
