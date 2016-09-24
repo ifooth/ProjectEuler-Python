@@ -109,7 +109,12 @@ def problem_9():
 
 
 def problem_10():
-    return sum(i for i in range(3,2000000,2) if ext.XInt(i).isPrime())+2
+    """
+    Summation of primes
+    素数的和
+    """
+    return sum(filter(lambda x: IntX(x).is_prime, range(3, 2000000, 2))) + 2
+
 
 def problem_11():
     grid=[map(int,i.split()) for i in data.problem11.strip().splitlines()]
