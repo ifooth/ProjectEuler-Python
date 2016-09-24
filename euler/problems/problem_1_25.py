@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-
 import itertools
 import functools
 import operator
@@ -235,7 +234,7 @@ def problem_17():
     Number letter counts
     表达数字的英文字母计数
     """
-    d_word = {
+    num_word = {
         1: 'one',
         2: 'two',
         3: 'three',
@@ -267,27 +266,24 @@ def problem_17():
         1000: 'thousand',
         'and': 'and'
     }
-    i_sum = ''
+    letters = ''
     # 计算1~100
     for i in range(1, 100):
-        if len(str(i)) == 1:
-            i_sum += d_word[i]
-            # print(d_word[i])
-        elif len(str(i)) == 2:
-            if i <= 20 or i % 10 == 0:
-                i_sum += d_word[i]
-                # print(d_word[i])
-            else:
-                i_sum += (d_word[i // 10 * 10] + d_word[i % 10])
-                # print(d_word[i//10*10]+d_word[i%10])
-    i_temp = i_sum
+        if i in num_word:
+            letters += num_word[i]
+        else:
+            letters += (num_word[i // 10 * 10] + num_word[i % 10])
+    hundred_letters = letters
     # 计算100~999
     for j in range(1, 10):
-        i_sum += (d_word[j] * 99 + d_word[100] * 99 + d_word['and'] * 99 + i_temp)
-        i_sum += (d_word[j] + d_word[100])
+        # one hundred and one
+        letters += (num_word[j] * 99 + num_word[100] * 99 +
+                    num_word['and'] * 99 + hundred_letters)
+        # one hundred
+        letters += (num_word[j] + num_word[100])
     # 计算1000 one thousand
-    i_sum += d_word[1] + d_word[1000]  # 1000
-    return len(i_sum)
+    letters += num_word[1] + num_word[1000]  # 1000
+    return len(letters)
 
 
 def problem_18():
