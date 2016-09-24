@@ -6,6 +6,7 @@ import fractions
 import functools
 import itertools
 import logging
+import math
 import operator
 import re
 
@@ -201,7 +202,7 @@ def is_prime(num):
         return False
     if num % 3 == 0 and num != 3:
         return False
-    if any((num % i) == 0 or (num % (i + 2)) == 0 for i in range(5, int(num ** 0.5) + 2, 6)):  # noqa
+    if any((num % i) == 0 or (num % (i + 2)) == 0 for i in range(5, int(math.sqrt(num)) + 2, 6)):  # noqa
         return False
     return True
 
@@ -217,14 +218,14 @@ def factors_generator(num):
     12 = 1 * 2 * 2 * 3
     """
     yield 1
-    i, limit = 2, num ** 0.5
-    while i <= limit:
-        if num % i == 0:
-            yield i
-            num //= i
-            limit = num ** 0.5
+    factor, limit = 2, math.sqrt(num)
+    while factor <= limit:
+        if num % factor == 0:
+            yield factor
+            num //= factor
+            limit = math.sqrt(num)
         else:
-            i += 1
+            factor += 1
     if num > 1:
         yield num
 
