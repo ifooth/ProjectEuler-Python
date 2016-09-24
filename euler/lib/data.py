@@ -3,12 +3,14 @@
 # Author: Joe Lei <thezero12@hotmail.com>
 import os.path
 
-datadir = os.path.join(os.path.dirname(__file__),'../data')
+datadir = os.path.join(os.path.dirname(__file__), '../data')
+
 
 def openfile(filename):
     """Return filename from data directory."""
-    with open(os.path.join(datadir,filename),'r') as fh:
+    with open(os.path.join(datadir, filename), 'r') as fh:
         return fh.read()
+
 
 problem8 = """
 73167176531330624919225119674426574742355349194934
@@ -56,7 +58,7 @@ problem11 = """
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
 """
 
-problem13="""
+problem13 = """
 37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629

@@ -7,9 +7,13 @@ import functools
 import operator
 import math
 import datetime
+import logging
 
 from euler.lib import *
-from euler.lib._int import IntX
+from euler.lib import _int
+
+
+LOG = logging.getLogger(__name__)
 
 
 def problem_1():
@@ -36,7 +40,7 @@ def problem_3():
     Largest prime factor
     最大质因数
     """
-    return max(IntX(600851475143).factors_generator())
+    return max(_int.factors_generator(600851475143))
 
 
 def problem_4():
@@ -47,7 +51,7 @@ def problem_4():
     all_numbers = map(
         lambda x: x[0] * x[1],
         itertools.product(range(100, 1000), range(100, 1000)))
-    return max(filter(lambda x: IntX(x).is_palindromic, all_numbers))
+    return max(filter(_int.is_palindromic, all_numbers))
 
 
 def problem_5():
@@ -57,7 +61,7 @@ def problem_5():
     """
     factors = {1: 1}
     for i in range(1, 20):
-        for key, value in IntX(i).factors().items():
+        for key, value in _int.factors(i).items():
             if key not in factors or value > factors[key]:
                 factors[key] = value
     return functools.reduce(
@@ -80,7 +84,7 @@ def problem_7():
     count, num = 2, 3
     while count != 10001:
         num += 2
-        if IntX(num).is_prime:
+        if _int.is_prime(num):
             count += 1
     return num
 
@@ -90,8 +94,7 @@ def problem_8():
     Largest product in a series
     连续数字最大乘积
     """
-    num_str = map(
-        lambda x: int(x), ''.join(data.problem8.strip().splitlines()))
+    num_str = map(int, ''.join(data.problem8.strip().splitlines()))
     return max(
         functools.reduce(operator.mul, num_str[i:i + 5])
         for i in range(len(num_str) - 4))
@@ -113,29 +116,68 @@ def problem_10():
     Summation of primes
     素数的和
     """
-    return sum(filter(lambda x: IntX(x).is_prime, range(3, 2000000, 2))) + 2
+    return sum(filter(_int.is_prime, range(3, 2000000, 2))) + 2
 
 
 def problem_11():
-    grid=[map(int,i.split()) for i in data.problem11.strip().splitlines()]
-    diffs=[(0, +1), (+1, 0), (+1, +1), (+1, -1)]
-    sr,sc = len(grid),len(grid[0])
-    return
-    i_str=[i.split() for i in data.problem11.strip().splitlines()]
-    for i in range(20):
-        for j in range(17):
-            # maximum product from horizontal and vertical lines
-            phv=max(int(i_str[i][j])*int(i_str[i][j+1])*int(i_str[i][j+2])*int(i_str[i][j+3]),int(i_str[j][i])*int(i_str[j+1][i])*int(i_str[j+2][i])*int(i_str[j+3][i]))
-            if i<16:
-                # maximum product from both diagonals
-                pd=max(int(i_str[i][j])*int(i_str[i+1][j+1])*int(i_str[i+2][j+2])*int(i_str[i+3][i+3]),int(i_str[i][j+3])*int(i_str[i+1][j+2])*int(i_str[i+2][j+1])*int(i_str[i+3][j]))
-    return max(phv,pd)
+    """
+    Largest product in a grid
+    方阵中的最大乘积
+    """
+    def max_row(row):
+        return max(functools.reduce(
+            operator.mul, row[i: i + 4]) for i in range(len(row) - 3))
+    grid = [map(int, i.split()) for i in data.problem11.strip().splitlines()]
+    max_product = 0
+    # 计算每行
+    for row in grid:
+        LOG.debug(row)
+        if max_row(row) > max_product:
+            max_product = max_row(row)
+    # 计算每列
+    column_grid = [[row[i] for row in grid] for i in range(20)]
+    for column in column_grid:
+        LOG.debug(column)
+        if max_row(column) > max_product:
+            max_product = max_row(column)
+    # 计算右对角线 /
+    right_diagonal_grid = []
+    for i in range(3, 20):
+        up_diagonal = [grid[i - count][count] for count in range(i + 1)]
+        LOG.debug(up_diagonal)
+        right_diagonal_grid.append(up_diagonal)
+    for i in range(16):
+        down_diagonal = [
+            grid[count][20 - count + i] for count in range(19, i, -1)]
+        LOG.debug(down_diagonal)
+        right_diagonal_grid.append(down_diagonal)
+    for row in right_diagonal_grid:
+        if max_row(row) > max_product:
+            max_product = max_row(row)
+    # 计算左对角线 \
+    left_diagonal_grid = []
+    for i in range(16, -1, -1):
+        up_diagonal = [grid[i + count][count] for count in range(0, 20 - i)]
+        LOG.debug(up_diagonal)
+        left_diagonal_grid.append(up_diagonal)
+    for i in range(16):
+        down_diagonal = [
+            grid[count - i - 1][count] for count in range(i + 1, 20)]
+        LOG.debug(down_diagonal)
+        left_diagonal_grid.append(down_diagonal)
+    for row in left_diagonal_grid:
+        if max_row(row) > max_product:
+            max_product = max_row(column)
+    return max_product
+
 
 def problem_12():
     return (i for i in itertools.accumulate(itertools.count(1)) if utilities.numberOfDivisors(i)>500).__next__()
 
+
 def problem_13():
     return str(sum(int(i) for i in data.problem13.strip().splitlines()))[:10]
+
 
 def problem_14():
     n=[0,0]
@@ -150,11 +192,14 @@ def problem_14():
             if n[0]<k:n=[k,temp]
     return n[1]
 
+
 def problem_15():
     return math.factorial(40)//(math.factorial(20)**2)
 
+
 def problem_16():
     return sum(int(i) for i in str(2**1000))
+
 
 def problem_17():
     d_word={1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',15:'fifteen',\
@@ -179,23 +224,29 @@ def problem_17():
     i_sum+=d_word[1]+d_word[1000] #1000
     return len(i_sum)
 
+
 def problem_18():
     i_str=[map(int,i.split()) for i in data.problem18.strip().splitlines()]
     itertools.product([0,+1],repeat=len(i_str)-1)
 
+
 def problem_19():
     return len(list((j,i,1)  for i in range(1,13) for j in range(1901,2001) if datetime.date(*(j,i,1)).weekday()==6))
+
 
 def problem_20():
     return sum(int(i) for i in str(math.factorial(100)))
 
+
 def problem_21():
     return sum(i for i in range(2,10000) if i!=utilities.sumOfDivisors(i) and i==utilities.sumOfDivisors(utilities.sumOfDivisors(i)))
+
 
 def problem_22():
     i_str=sorted([i.strip('"') for i in next(data.openfile('names.txt')).strip().split(',')])
     #print(type(next(data.openfile('names.txt'))))
     return sum((i+1)*sum(ord(j)-64 for j in i_str[i]) for i in range(len(i_str)))
+
 
 def problem_23():
     l_abundant=set(i for i in range(1,28123) if utilities.sumOfDivisors(i)>i)
@@ -207,18 +258,15 @@ def problem_23():
             if i+j in l_result:l_result.remove(i+j)
     return sum(l_result)
     """
+
 def problem_24():
     i_str='0123456789'
     #return len(list((itertools.permutations(i_str,10))))
     return ''.join(sorted(list(itertools.permutations(i_str,10)))[1000000-1])
+
 
 def problem_25():
     i_sum=[1,1]
     for i in itertools.count(3):
         i_sum=[i_sum[1],i_sum[1]+i_sum[0]]
         if len(str(i_sum[1]))==1000:return i
-
-
-
-
-

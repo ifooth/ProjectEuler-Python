@@ -188,8 +188,49 @@ class fractionx(fractions.Fraction):
         return l
 
 
+def is_prime(num):
+    """素数检测法
+    """
+    if num < 2:
+        return False
+    if num % 2 == 0 and num != 2:
+        return False
+    if num % 3 == 0 and num != 3:
+        return False
+    if any((num % i) == 0 or (num % (i + 2)) == 0 for i in range(5, int(num ** 0.5) + 2, 6)):  # noqa
+        return False
+    return True
 
-if __name__=="__main__":
-    fractions.Fraction()
-    xf=XFraction()
-    xf.toFraction()
+
+def is_palindromic(num):
+    """回文数 9009
+    """
+    return str(num) == str(num)[::-1]
+
+
+def factors_generator(num):
+    """因子生成器
+    12 = 1 * 2 * 2 * 3
+    """
+    yield 1
+    i, limit = 2, num**0.5
+    while i <= limit:
+        if num % i == 0:
+            yield i
+            num //= i
+            limit = num**0.5
+        else:
+            i += 1
+    if num > 1:
+        yield num
+
+
+def factors(num):
+    """
+    因数分解 12 = 1^1 * 2^2 * 3^1
+    return {1: 1, 2: 2, : 3: 1}
+    """
+    counter = collections.Counter(factors_generator(num))
+    result = dict(counter)
+    LOG.debug('%s factors is: %s', num, result)
+    return result
