@@ -62,7 +62,11 @@ def problem_5():
 
 
 def problem_6():
-    return abs(sum(i**2 for i in range(1,101))-sum(i for i in range(1,101))**2)
+    """Sum square difference
+    """
+    return abs(
+        sum(i**2 for i in range(1, 101)) - sum(i for i in range(1, 101)) ** 2)
+
 
 def problem_7():
     n,i=1,3
