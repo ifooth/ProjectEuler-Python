@@ -1,8 +1,6 @@
-'''
-Created on Jun 11, 2012
-
-@author: Joe Lei
-'''
+# -*- coding: utf-8 -*-
+# Copyright 2015 IFOOTH
+# Author: Joe Lei <thezero12@hotmail.com>
 import os.path
 
 datadir = os.path.join(os.path.dirname(__file__),'../data')
@@ -11,7 +9,7 @@ def openfile(filename):
     """Return filename from data directory."""
     with open(os.path.join(datadir,filename),'r') as fh:
         return fh.read()
-  
+
 problem8 = """
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
