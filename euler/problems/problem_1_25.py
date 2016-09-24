@@ -178,7 +178,7 @@ def problem_12():
     高度可约的三角形数
     """
     num = [1, 1]
-    while len(_int.divisor(num[1])) <= 500:
+    while len(_int.positive_divisors(num[1])) <= 500:
         num[0] += 1
         num[1] += num[0]
     return num[1]
@@ -333,7 +333,14 @@ def problem_20():
 
 
 def problem_21():
-    return sum(i for i in range(2,10000) if i!=utilities.sumOfDivisors(i) and i==utilities.sumOfDivisors(utilities.sumOfDivisors(i)))
+    """
+    Amicable numbers
+    亲和数
+    """
+    return sum(filter(
+        lambda x: x != sum(_int.proper_divisors(x)) and
+        x == sum(_int.proper_divisors(sum(_int.proper_divisors(x)))),
+        range(2, 10000)))
 
 
 def problem_22():

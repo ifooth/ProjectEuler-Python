@@ -1,0 +1,13 @@
+Integer: 正整数
+Divisor: 约数
+palindromic： 回文数
+prime: 素数
+
+Factorization： 因式分解
+integer factorization: 整数分解
+prime factorization: 素因数分解
+
+partially ordered: 偏序关
+Hasse diagram: 哈斯图
+proper_divisors: 真因子
+positive_divisors： 正因子

@@ -217,12 +217,12 @@ def factors_generator(num):
     12 = 1 * 2 * 2 * 3
     """
     yield 1
-    i, limit = 2, num**0.5
+    i, limit = 2, num ** 0.5
     while i <= limit:
         if num % i == 0:
             yield i
             num //= i
-            limit = num**0.5
+            limit = num ** 0.5
         else:
             i += 1
     if num > 1:
@@ -240,10 +240,12 @@ def factors(num):
     return result
 
 
-def divisor(num):
+def positive_divisors(num):
     """
-    返回所有因子
-    12 = [1, 2, 3, 4, 12]
+    返回所有正因子
+    12 = [1, 2, 3, 4, 6, 12]
+    partially ordered 偏序关系
+    Hasse diagram 哈斯图
     """
     _factors = list(factors_generator(num))
     total_divisor = [(1, 1), (1, num)]
@@ -253,3 +255,18 @@ def divisor(num):
         lambda x: functools.reduce(operator.mul, x), total_divisor)))
     LOG.debug('%s divisor: %s', num, total_divisor)
     return total_divisor
+
+
+def proper_divisors(num):
+    """
+    真因子 小于n且整除n的正整数
+    不包含自己
+    12 = [1, 2, 3, 4, 6]
+    """
+    _factors = factors(num)
+    divisors = [1]
+    for prime, power in _factors.items():
+        divisors = [d * prime ** p for d in divisors for p in range(power + 1)]
+    divisors = list(set(divisors))
+    divisors.remove(num)
+    return divisors
