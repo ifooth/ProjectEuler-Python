@@ -62,20 +62,37 @@ def problem_28():
 
 
 def problem_29():
-    return len(set(i**j for i in range(2,101) for j in range(2,101)))
+    """
+    Distinct powers
+    不同的幂
+    """
+    return len(set(i ** j for i in range(2, 101) for j in range(2, 101)))
+
 
 def problem_30():
-    #return sum(i for i in range(2,4000000) if sum(int(j)**5 for j in str(i))==i)
-    return sum(filter(lambda i: i == sum([int(x)**5 for x in str(i)]), range(2,400000)))
+    """
+    Digit fifth powers
+    各位数字的五次幂
+    limit 9**5 * 4
+    """
+    return sum(filter(
+        lambda num: num == sum(map(lambda x: int(x) ** 5, str(num))),
+        range(2, 9 ** 5 * 7)))
+
 
 def problem_31():
+    """
+    Coin sums
+    硬币求和
+    """
     target = 200
-    coins = [1,2,5,10,20,50,100,200]
-    ways = [1]+[0]*target
+    coins = [1, 2, 5, 10, 20, 50, 100, 200]
+    ways = [1] + [0] * target
     for coin in coins:
-        for i in range(coin, target+1):
-            ways[i] += ways[i-coin]
+        for i in range(coin, target + 1):
+            ways[i] += ways[i - coin]
     return ways[target]
+
 
 def problem_32():
     i_num='123456789'
