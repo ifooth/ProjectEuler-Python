@@ -325,7 +325,11 @@ def problem_19():
 
 
 def problem_20():
-    return sum(int(i) for i in str(math.factorial(100)))
+    """
+    Factorial digit sum
+    阶乘数字和
+    """
+    return sum(map(int, str(math.factorial(100))))
 
 
 def problem_21():
