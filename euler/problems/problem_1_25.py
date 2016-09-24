@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-import itertools
-import functools
-import operator
-import math
 import datetime
+import functools
+import itertools
 import logging
+import math
+import operator
 
-from euler.lib import *
-from euler.lib import data
 from euler.lib import _int
+from euler.lib import data
 
 
 LOG = logging.getLogger(__name__)
@@ -378,7 +377,12 @@ def problem_24():
 
 
 def problem_25():
-    i_sum=[1,1]
-    for i in itertools.count(3):
-        i_sum=[i_sum[1],i_sum[1]+i_sum[0]]
-        if len(str(i_sum[1]))==1000:return i
+    """
+    1000-digit Fibonacci number
+    一千位斐波那契数
+    """
+    count = 0
+    for fib in _int.fibonacci_generator():
+        count += 1
+        if len(str(fib)) == 1000:
+            return count

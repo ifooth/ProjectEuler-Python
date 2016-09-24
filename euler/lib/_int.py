@@ -270,3 +270,22 @@ def proper_divisors(num):
     divisors = list(set(divisors))
     divisors.remove(num)
     return divisors
+
+
+def fibonacci_generator():
+    """斐波那契数生成器
+    F1 = 1
+    F2 = 1
+    Fn = Fn−1 + Fn−2
+    """
+    fib_1 = 1
+    yield fib_1
+
+    fib_2 = 1
+    yield fib_1
+
+    while True:
+        fib_n = fib_1 + fib_2
+        fib_1 = fib_2
+        fib_2 = fib_n
+        yield fib_n
