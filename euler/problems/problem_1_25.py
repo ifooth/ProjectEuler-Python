@@ -27,13 +27,6 @@ def problem_2():
     return sum(filter(lambda x: x % 2 == 0, fibonacci))
 
 
-def Fibonacci(max):
-    a, b = 0, 1
-    while a < max:
-        yield a
-        a, b = b, a + b
-
-
 def problem_3():
     """Largest prime factor
     """
@@ -80,14 +73,14 @@ def problem_7():
 
 
 def problem_8():
-    i_str=''.join(data.problem8.strip().splitlines())
+    """Largest product in a series
     """
-    i_temp=[]
-    for i in range(len(i_str)-4):
-        i_temp.append(functools.reduce(operator.mul,(int(j) for j in i_str[i:i+5])))
-    return max(i_temp)
-    """
-    return max(functools.reduce(operator.mul,(int(j) for j in i_str[i:i+5])) for i in range(len(i_str)-4))
+    num_str = map(
+        lambda x: int(x), ''.join(data.problem8.strip().splitlines()))
+    return max(
+        functools.reduce(operator.mul, num_str[i:i + 5])
+        for i in range(len(num_str) - 4))
+
 
 def problem_9():
     for i in range(1,1000):
