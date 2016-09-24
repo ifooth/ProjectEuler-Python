@@ -344,9 +344,15 @@ def problem_21():
 
 
 def problem_22():
-    i_str=sorted([i.strip('"') for i in next(data.openfile('names.txt')).strip().split(',')])
-    #print(type(next(data.openfile('names.txt'))))
-    return sum((i+1)*sum(ord(j)-64 for j in i_str[i]) for i in range(len(i_str)))
+    """
+    Names score
+    姓名得分
+    """
+    names = sorted(map(
+        lambda x: x.strip('"'), data.openfile('names.txt').strip().split(',')))
+    return sum(map(
+        lambda x: (x[0] + 1) * sum(map(lambda y: ord(y) - 64, x[1])),
+        enumerate(names)))
 
 
 def problem_23():
