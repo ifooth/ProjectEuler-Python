@@ -350,7 +350,7 @@ def problem_22():
     姓名得分
     """
     names = sorted(map(
-        lambda x: x.strip('"'), data.openfile('names.txt').strip().split(',')))
+        lambda x: x.strip('"'), data.get_file('names.txt').strip().split(',')))
     return sum(map(
         lambda x: (x[0] + 1) * sum(map(lambda y: ord(y) - 64, x[1])),
         enumerate(names)))

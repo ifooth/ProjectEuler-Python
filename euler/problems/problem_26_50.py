@@ -47,6 +47,20 @@ def problem_27():
     return max_a * max_b
 
 
+def problem_28():
+    """
+    Number spiral diagonals
+    螺旋数阵对角线
+    """
+    start = 1
+    sum_diagonals = 1
+    for n in range(1, (1001 - 1) / 2 + 1):
+        for count in range(4):
+            start += 2 * n
+            sum_diagonals += start
+    return sum_diagonals
+
+
 def problem_29():
     return len(set(i**j for i in range(2,101) for j in range(2,101)))
 

@@ -6,7 +6,7 @@ import os.path
 datadir = os.path.join(os.path.dirname(__file__), '../data')
 
 
-def openfile(filename):
+def get_file(filename):
     """Return filename from data directory."""
     with open(os.path.join(datadir, filename), 'r') as fh:
         return fh.read()
@@ -15,7 +15,7 @@ def openfile(filename):
 def get_result(problem_id):
     """返回结果
     """
-    data = [i.strip() for i in openfile('euler_results.dat').splitlines()]
+    data = [i.strip() for i in get_file('euler_results.dat').splitlines()]
     try:
         result = data[problem_id - 1]
         if result:
