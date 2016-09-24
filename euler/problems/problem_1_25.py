@@ -50,13 +50,16 @@ def problem_4():
 
 
 def problem_5():
-    d_temp={1:1}
-    for i in range(1,20):
-        for key,value in ext.XInt(i).factors().items():
-        #for key,value in utilities.factors(i).items():
-            if key not in d_temp or value>d_temp[key]:d_temp.update({key:value})
-    #print(d_temp)
-    return functools.reduce(operator.mul,(key**value for key,value in d_temp.items()))
+    """Smallest multiple
+    """
+    factors = {1: 1}
+    for i in range(1, 20):
+        for key, value in IntX(i).factors().items():
+            if key not in factors or value > factors[key]:
+                factors[key] = value
+    return functools.reduce(
+        operator.mul, (key**value for key, value in factors.items()))
+
 
 def problem_6():
     return abs(sum(i**2 for i in range(1,101))-sum(i for i in range(1,101))**2)
