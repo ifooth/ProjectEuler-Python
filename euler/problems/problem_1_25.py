@@ -185,7 +185,11 @@ def problem_12():
 
 
 def problem_13():
-    return str(sum(int(i) for i in data.problem13.strip().splitlines()))[:10]
+    """
+    Large sum
+    大和
+    """
+    return str(sum(map(int, data.problem13.strip().splitlines())))[:10]
 
 
 def problem_14():
