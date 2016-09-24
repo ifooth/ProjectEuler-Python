@@ -193,17 +193,25 @@ def problem_13():
 
 
 def problem_14():
-    n=[0,0]
-    for i in range(2,1000000):
-        temp=i
-        k=0
-        while i!=1:
-            if i&1:i=i*3+1
-            else:i//=2
-            k+=1
+    """
+    Longest Collatz sequence
+    最长考拉兹序列
+    """
+    result = [0, 0]
+    for i in range(2, 1000000):
+        raw_value = i
+        count = 0
+        while i != 1:
+            # 偶数做&运算是0，奇数是1
+            if i & 1:
+                i = i * 3 + 1
+            else:
+                i //= 2
+            count += 1
         else:
-            if n[0]<k:n=[k,temp]
-    return n[1]
+            if result[0] < count:
+                result = [count, raw_value]
+    return result[1]
 
 
 def problem_15():
