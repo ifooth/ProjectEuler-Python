@@ -49,7 +49,10 @@ class IntX(long):
     def isPalindromic(self):
         return str(self)==str(self)[::-1]
 
-    def factors_temp(self):
+    def factors_generator(self):
+        """因子生成器
+        12 = 1 * 2 * 2 * 3
+        """
         yield 1
         i, limit = 2, self**0.5
         while i <= limit:
@@ -64,13 +67,11 @@ class IntX(long):
 
     def factors(self):
         """
-        因数分解 13195 = 5 * 7 * 13 * 29
-        return {5: 1, 7: 1, : 13: 1, 29: 1}
+        因数分解 12 = 1^1 * 2^2 * 3^1
+        return {1: 1, 2: 2, : 3: 1}
         """
-        cnt = collections.Counter()
-        for j in list(self.factors_temp()):
-            cnt[j] += 1
-        result = dict(cnt)
+        counter = collections.Counter(self.factors_generator())
+        result = dict(counter)
         LOG.debug('%s factors is: %s', self, result)
         return result
 

@@ -37,7 +37,7 @@ def Fibonacci(max):
 def problem_3():
     """Largest prime factor
     """
-    return max(IntX(600851475143).factors())
+    return max(IntX(600851475143).factors_generator())
 
 
 def problem_4():
