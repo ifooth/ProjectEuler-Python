@@ -28,10 +28,12 @@ def problem_2():
     Even Fibonacci numbers
     偶斐波那契数
     """
-    fibonacci = [1, 2]
-    while fibonacci[-1] < 4000000:
-        fibonacci.append(fibonacci[-1] + fibonacci[-2])
-    return sum(filter(lambda x: x % 2 == 0, fibonacci))
+    even_fibonacci = []
+    for fib in _int.fibonacci_generator(1, 2):
+        if fib % 2 == 0:
+            even_fibonacci.append(fib)
+        if fib > 4000000:
+            return sum(even_fibonacci)
 
 
 def problem_3():

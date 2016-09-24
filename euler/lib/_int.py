@@ -272,17 +272,14 @@ def proper_divisors(num):
     return divisors
 
 
-def fibonacci_generator():
+def fibonacci_generator(fib_1=1, fib_2=1):
     """斐波那契数生成器
-    F1 = 1
-    F2 = 1
+    F1 = fib_1
+    F2 = fib_2
     Fn = Fn−1 + Fn−2
     """
-    fib_1 = 1
     yield fib_1
-
-    fib_2 = 1
-    yield fib_1
+    yield fib_2
 
     while True:
         fib_n = fib_1 + fib_2
