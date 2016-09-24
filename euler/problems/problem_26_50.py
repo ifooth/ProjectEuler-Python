@@ -6,6 +6,7 @@ import itertools
 import logging
 
 from euler.lib import *
+from euler.lib import _int
 
 LOG = logging.getLogger(__name__)
 
@@ -31,13 +32,20 @@ def problem_26():
 
 
 def problem_27():
-    i_max=[0,0,0]
-    for i in range(-1000,1000):
-        for j in range(-1000,1000):
-            for n in itertools.count(0):
-                if not ext.XInt(n**2+i*n+j).isPrime():break
-            if n>i_max[0]:i_max=[n,i,j]
-    return i_max[1]*i_max[2]
+    """
+    Quadratic primes
+    二次“素数生成”多项式
+    """
+    max_a, max_b, max_count = 0, 0, 0
+    for a in range(-1000, 1000):
+        for b in range(-1000, 1000):
+            for count in itertools.count(0):
+                if not _int.is_prime(count ** 2 + a * count + b):
+                    break
+            if count > max_count:
+                max_a, max_b, max_count = a, b, count
+    return max_a * max_b
+
 
 def problem_29():
     return len(set(i**j for i in range(2,101) for j in range(2,101)))
