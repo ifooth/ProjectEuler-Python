@@ -369,9 +369,12 @@ def problem_23():
 
 
 def problem_24():
-    i_str='0123456789'
-    #return len(list((itertools.permutations(i_str,10))))
-    return ''.join(sorted(list(itertools.permutations(i_str,10)))[1000000-1])
+    """
+    Lexicographic permutations
+    字典序排列
+    """
+    letters = '0123456789'
+    return ''.join(sorted(itertools.permutations(letters, 10))[1000000 - 1])
 
 
 def problem_25():
