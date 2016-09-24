@@ -69,21 +69,15 @@ def problem_6():
 
 
 def problem_7():
-    n,i=1,3
-    while n!=10001:
-        if ext.XInt(i).isPrime():n+=1
-        i+=2
-    else:return i-2
+    """10001st prime
     """
-    s_prime={2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,79, 83, 89, 97}
-    j=101
-    while len(s_prime)!=10001:
-        for k in s_prime:
-            if j%k==0:break
-        else:s_prime.add(j)
-        j+=2
-    return max(s_prime)
-    """
+    count, num = 2, 3
+    while count != 10001:
+        num += 2
+        if IntX(num).is_prime:
+            count += 1
+    return num
+
 
 def problem_8():
     i_str=''.join(data.problem8.strip().splitlines())
