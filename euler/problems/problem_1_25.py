@@ -9,6 +9,7 @@ import datetime
 import logging
 
 from euler.lib import *
+from euler.lib import data
 from euler.lib import _int
 
 
@@ -287,8 +288,30 @@ def problem_17():
 
 
 def problem_18():
-    i_str=[map(int,i.split()) for i in data.problem18.strip().splitlines()]
-    itertools.product([0,+1],repeat=len(i_str)-1)
+    """
+    Maximum path sum I
+    最大路径和 I
+    关键字：动态规划，递归，至底向上消俄罗斯方块
+    """
+    binary_tree = list(map(int, i.split())
+                       for i in data.problem18.strip().splitlines())
+
+    def helper(root, node):
+        for idx, num in enumerate(root):
+            left = num + node[idx]
+            right = num + node[idx + 1]
+            root[idx] = max([left, right])
+        return root
+
+    node = binary_tree[-1]
+    root = binary_tree[-2]
+    idx = -2
+    while len(root) != 1:
+        root = helper(root, node)
+        idx -= 1
+        node = root
+        root = binary_tree[idx]
+    return helper(root, node)
 
 
 def problem_19():
