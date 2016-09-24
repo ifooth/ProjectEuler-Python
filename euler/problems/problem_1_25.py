@@ -9,17 +9,23 @@ import math
 import datetime
 
 from euler.lib import *
+from euler.lib._int import IntX
 
 
 def problem_1():
+    """Multiples of 3 and 5
+    """
     return sum(i for i in range(1000) if i % 3 == 0 or i % 5 == 0)
 
 
 def problem_2():
-    Fibonacci = [1, 2]
-    while Fibonacci[-1] < 4000000:
-        Fibonacci.append(Fibonacci[-1] + Fibonacci[-2])
-    return sum(i for i in Fibonacci[:-1] if i % 2 == 0)
+    """Even Fibonacci numbers
+    """
+    fibonacci = [1, 2]
+    while fibonacci[-1] < 4000000:
+        fibonacci.append(fibonacci[-1] + fibonacci[-2])
+    return sum(filter(lambda x: x % 2 == 0, fibonacci))
+
 
 def Fibonacci(max):
     a, b = 0, 1
@@ -27,8 +33,12 @@ def Fibonacci(max):
         yield a
         a, b = b, a + b
 
+
 def problem_3():
-    return max(ext.XInt(600851475143).factors())
+    """Largest prime factor
+    """
+    return max(IntX(600851475143).factors())
+
 
 def problem_4():
     return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if ext.XInt(x*y).isPalindromic())

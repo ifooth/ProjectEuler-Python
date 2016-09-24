@@ -5,6 +5,7 @@ import argparse
 import logging
 import os
 import sys
+from euler import settings  # noqa
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,16 +17,10 @@ from problems import Problem
 from profiling import profile
 
 
-log = logging.getLogger('__main__')
+LOG = logging.getLogger('euler.__main__')
 
 
 def main():
-    formater = '%(asctime)s %(module)s:%(lineno)s [%(levelname)s]:%(message)s'
-    handler = logging.StreamHandler()
-    handler.setFormatter(logging.Formatter(formater))
-    log.addHandler(handler)
-    log.setLevel(logging.DEBUG)
-
     parser = argparse.ArgumentParser(description='euler commander')
     parser.add_argument('problem', metavar='num', type=int, nargs=1,
                         help='problem num')
@@ -37,7 +32,7 @@ def main():
 
     if args.problem:
         result = Problem(args.problem[0]).run()
-        log.info(result)
+        LOG.info(result)
     if args.profile:
         profile.euler_profile(args.profile[0])
     if args.test:
