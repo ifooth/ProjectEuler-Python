@@ -14,6 +14,7 @@ if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
 from euler import settings  # noqa
+from euler.lib import data
 
 PROBLEM_FUNC = {}
 module_pattern = re.compile(r'^(?P<name>problem_\d+_\d+).py$')
@@ -54,7 +55,9 @@ def main():
         result = PROBLEM_FUNC[name]()
     except KeyboardInterrupt:
         result = 'Interrupted'
-    LOG.info('%s, use %.3f(s)', result, time.time() - start)
+    LOG.info(
+        '%s, use %.3f(s), euler: %s', result, time.time() - start,
+        data.get_result(args.problem[0]))
 
 
 if __name__ == "__main__":

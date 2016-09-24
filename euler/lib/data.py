@@ -12,6 +12,20 @@ def openfile(filename):
         return fh.read()
 
 
+def get_result(problem_id):
+    """返回结果
+    """
+    data = [i.strip() for i in openfile('euler_results.dat').splitlines()]
+    try:
+        result = data[problem_id - 1]
+        if result:
+            return int(result)
+        else:
+            return 'had empty result'
+    except IndexError:
+        return 'have no result'
+
+
 problem8 = """
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
