@@ -2,43 +2,58 @@
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 import argparse
+import inspect
 import logging
 import os
+import re
 import sys
 import time
-from euler import settings  # noqa
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
-from problems import Problem
-from profiling import profile
+from euler import settings  # noqa
 
+PROBLEM_FUNC = {}
+module_pattern = re.compile(r'^(?P<name>problem_\d+_\d+).py$')
+func_pattern = re.compile(r'^problem_(?P<p_id>\d+)$')
 
 LOG = logging.getLogger('euler.__main__')
 
 
+def load_problems():
+    """动态加载题目
+    """
+    for file_name in os.listdir(os.path.join(BASE_DIR, 'euler/problems')):
+        module = module_pattern.match(file_name)
+        if module:
+            m = __import__('euler.problems.%s' % module.groupdict()['name'])
+            all_members = inspect.getmembers(
+                getattr(m.problems, module.groupdict()['name']))
+            func = dict(filter(
+                lambda x: func_pattern.match(x[0]), all_members))
+            PROBLEM_FUNC.update(func)
+
+load_problems()
+
+
 def main():
-    parser = argparse.ArgumentParser(description='euler commander')
-    parser.add_argument('problem', metavar='num', type=int, nargs=1,
-                        help='problem num')
-    parser.add_argument('--test', metavar='num', type=int, nargs=1,
-                        help='test num')
-    parser.add_argument('--profile', metavar='num', type=int, nargs=1,
-                        help='profile num')
+    parser = argparse.ArgumentParser(
+        description='EulerProject problem launcher')
+    parser.add_argument('problem', metavar='id', type=int, nargs=1,
+                        help='run problem')
     args = parser.parse_args()
 
     if args.problem:
+        name = 'problem_%s' % args.problem[0]
+        if name not in PROBLEM_FUNC:
+            LOG.error('not found %s' % name)
+            sys.exit(1)
         start = time.time()
-        result = Problem(args.problem[0]).run()
+        result = PROBLEM_FUNC[name]()
         LOG.info('%s, use %.3f(s)', result, time.time() - start)
-    if args.profile:
-        profile.euler_profile(args.profile[0])
-    if args.test:
-        pass
+
 
 if __name__ == "__main__":
     main()

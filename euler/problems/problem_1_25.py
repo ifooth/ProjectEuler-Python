@@ -11,7 +11,6 @@ import logging
 
 from euler.lib import *
 from euler.lib import _int
-from euler.lib import calc
 
 
 LOG = logging.getLogger(__name__)
@@ -74,7 +73,8 @@ def problem_6():
     平方的和与和的平方之差
     """
     return abs(
-        sum(i ** 2 for i in range(1, 101)) - sum(i for i in range(1, 101)) ** 2)
+        sum(i ** 2 for i in range(1, 101)) -
+        sum(i for i in range(1, 101)) ** 2)
 
 
 def problem_7():
@@ -231,26 +231,62 @@ def problem_16():
 
 
 def problem_17():
-    d_word={1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',15:'fifteen',\
-            16:'sixteen',17:'seventeen',18:'eighteen',19:'nineteen',20:'twenty',30:'thirty',40:'forty',50:'fifty',60:'sixty',70:'seventy',80:'eighty',90:'ninety',100:'hundred',\
-            1000:'thousand','a':'and'}
-    i_sum=''
-    for i in range(1,100):
-        if len(str(i))==1:
-            i_sum+=d_word[i]
-            #print(d_word[i])
-        elif len(str(i))==2:
-            if i<=20 or i%10==0:
-                i_sum+=d_word[i]
-                #print(d_word[i])
+    """
+    Number letter counts
+    表达数字的英文字母计数
+    """
+    d_word = {
+        1: 'one',
+        2: 'two',
+        3: 'three',
+        4: 'four',
+        5: 'five',
+        6: 'six',
+        7: 'seven',
+        8: 'eight',
+        9: 'nine',
+        10: 'ten',
+        11: 'eleven',
+        12: 'twelve',
+        13: 'thirteen',
+        14: 'fourteen',
+        15: 'fifteen',
+        16: 'sixteen',
+        17: 'seventeen',
+        18: 'eighteen',
+        19: 'nineteen',
+        20: 'twenty',
+        30: 'thirty',
+        40: 'forty',
+        50: 'fifty',
+        60: 'sixty',
+        70: 'seventy',
+        80: 'eighty',
+        90: 'ninety',
+        100: 'hundred',
+        1000: 'thousand',
+        'and': 'and'
+    }
+    i_sum = ''
+    # 计算1~100
+    for i in range(1, 100):
+        if len(str(i)) == 1:
+            i_sum += d_word[i]
+            # print(d_word[i])
+        elif len(str(i)) == 2:
+            if i <= 20 or i % 10 == 0:
+                i_sum += d_word[i]
+                # print(d_word[i])
             else:
-                i_sum+=(d_word[i//10*10]+d_word[i%10])
-                #print(d_word[i//10*10]+d_word[i%10])
-    i_temp=i_sum
-    for j in range(1,10):
-        i_sum+=(d_word[j]*99+d_word[100]*99+d_word['a']*99+i_temp)
-        i_sum+=(d_word[j]+d_word[100])
-    i_sum+=d_word[1]+d_word[1000] #1000
+                i_sum += (d_word[i // 10 * 10] + d_word[i % 10])
+                # print(d_word[i//10*10]+d_word[i%10])
+    i_temp = i_sum
+    # 计算100~999
+    for j in range(1, 10):
+        i_sum += (d_word[j] * 99 + d_word[100] * 99 + d_word['and'] * 99 + i_temp)
+        i_sum += (d_word[j] + d_word[100])
+    # 计算1000 one thousand
+    i_sum += d_word[1] + d_word[1000]  # 1000
     return len(i_sum)
 
 
@@ -260,7 +296,7 @@ def problem_18():
 
 
 def problem_19():
-    return len(list((j,i,1)  for i in range(1,13) for j in range(1901,2001) if datetime.date(*(j,i,1)).weekday()==6))
+    return len(list((j,i,1)  for i in range(1,13) for j in range(1901,2001) if datetime.date(*(j,i,1)).weekday() == 6))
 
 
 def problem_20():
