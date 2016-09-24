@@ -45,14 +45,16 @@ def main():
                         help='run problem')
     args = parser.parse_args()
 
-    if args.problem:
-        name = 'problem_%s' % args.problem[0]
-        if name not in PROBLEM_FUNC:
-            LOG.error('not found %s' % name)
-            sys.exit(1)
-        start = time.time()
+    name = 'problem_%s' % args.problem[0]
+    if name not in PROBLEM_FUNC:
+        LOG.error('not found %s' % name)
+        sys.exit(1)
+    start = time.time()
+    try:
         result = PROBLEM_FUNC[name]()
-        LOG.info('%s, use %.3f(s)', result, time.time() - start)
+    except KeyboardInterrupt:
+        result = 'Interrupted'
+    LOG.info('%s, use %.3f(s)', result, time.time() - start)
 
 
 if __name__ == "__main__":

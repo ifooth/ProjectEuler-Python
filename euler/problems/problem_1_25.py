@@ -356,15 +356,17 @@ def problem_22():
 
 
 def problem_23():
-    l_abundant=set(i for i in range(1,28123) if utilities.sumOfDivisors(i)>i)
-    return sum(i for i in range(28123) if not any((i-a in l_abundant) for a in l_abundant))
     """
-    l_result=set(range(1,28123))
-    for i in l_abundant:
-        for j in l_abundant:
-            if i+j in l_result:l_result.remove(i+j)
-    return sum(l_result)
+    Non-abundant sums
+    并非盈数之和
     """
+    abundants = filter(
+        lambda x: sum(_int.proper_divisors(x)) > x, range(1, 28123))
+    abundant_sums = set(map(
+        lambda x: x[0] + x[1],
+        set(itertools.combinations_with_replacement(abundants, 2))))
+    return sum(filter(lambda x: x not in abundant_sums, range(1, 28123)))
+
 
 def problem_24():
     i_str='0123456789'
