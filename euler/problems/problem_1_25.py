@@ -314,7 +314,14 @@ def problem_18():
 
 
 def problem_19():
-    return len(list((j,i,1)  for i in range(1,13) for j in range(1901,2001) if datetime.date(*(j,i,1)).weekday() == 6))
+    """
+    Counting Sundays
+    数星期日
+    Monday is 0 and Sunday is 6.
+    """
+    return len(filter(
+        lambda x: datetime.date(x[0], x[1], 1).weekday() == 6,
+        [(year, month) for month in range(1, 13) for year in range(1901, 2001)]))  # noqa
 
 
 def problem_20():
