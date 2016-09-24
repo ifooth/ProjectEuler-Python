@@ -5,6 +5,7 @@ import argparse
 import logging
 import os
 import sys
+import time
 from euler import settings  # noqa
 
 
@@ -31,8 +32,9 @@ def main():
     args = parser.parse_args()
 
     if args.problem:
+        start = time.time()
         result = Problem(args.problem[0]).run()
-        LOG.info(result)
+        LOG.info('%s, use %.3f(s)', result, time.time() - start)
     if args.profile:
         profile.euler_profile(args.profile[0])
     if args.test:

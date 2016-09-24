@@ -41,7 +41,13 @@ def problem_3():
 
 
 def problem_4():
-    return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if ext.XInt(x*y).isPalindromic())
+    """Largest palindrome product
+    """
+    all_numbers = map(
+        lambda x: x[0] * x[1],
+        itertools.product(range(100, 1000), range(100, 1000)))
+    return max(filter(lambda x: IntX(x).is_palindromic, all_numbers))
+
 
 def problem_5():
     d_temp={1:1}

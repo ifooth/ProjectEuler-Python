@@ -45,9 +45,11 @@ class IntX(long):
             i+=1
         return prime_list
 
-
-    def isPalindromic(self):
-        return str(self)==str(self)[::-1]
+    @property
+    def is_palindromic(self):
+        """回文数 9009
+        """
+        return str(self) == str(self)[::-1]
 
     def factors_generator(self):
         """因子生成器
