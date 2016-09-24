@@ -3,8 +3,12 @@
 # Author: Joe Lei <thezero12@hotmail.com>
 import collections
 import fractions
-import re
+import functools
+import itertools
 import logging
+import operator
+import re
+
 
 LOG = logging.getLogger(__name__)
 
@@ -234,3 +238,18 @@ def factors(num):
     result = dict(counter)
     LOG.debug('%s factors is: %s', num, result)
     return result
+
+
+def divisor(num):
+    """
+    返回所有因子
+    12 = [1, 2, 3, 4, 12]
+    """
+    _factors = list(factors_generator(num))
+    total_divisor = [(1, 1), (1, num)]
+    for i in range(2, len(_factors)):
+        total_divisor.extend(itertools.combinations(_factors, i))
+    total_divisor = list(set(map(
+        lambda x: functools.reduce(operator.mul, x), total_divisor)))
+    LOG.debug('%s divisor: %s', num, total_divisor)
+    return total_divisor

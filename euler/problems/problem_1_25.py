@@ -11,6 +11,7 @@ import logging
 
 from euler.lib import *
 from euler.lib import _int
+from euler.lib import calc
 
 
 LOG = logging.getLogger(__name__)
@@ -172,7 +173,15 @@ def problem_11():
 
 
 def problem_12():
-    return (i for i in itertools.accumulate(itertools.count(1)) if utilities.numberOfDivisors(i)>500).__next__()
+    """
+    Highly divisible triangular number
+    高度可约的三角形数
+    """
+    num = [1, 1]
+    while len(_int.divisor(num[1])) <= 500:
+        num[0] += 1
+        num[1] += num[0]
+    return num[1]
 
 
 def problem_13():
