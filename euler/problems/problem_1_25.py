@@ -296,22 +296,21 @@ def problem_18():
     binary_tree = list(map(int, i.split())
                        for i in data.problem18.strip().splitlines())
 
-    def helper(root, node):
-        for idx, num in enumerate(root):
-            left = num + node[idx]
-            right = num + node[idx + 1]
-            root[idx] = max([left, right])
-        return root
+    def helper(tree, leaf):
+        LOG.debug(leaf)
+        if len(leaf) == 1:
+            return leaf
+        else:
+            root = tree.pop(-1)
+            for idx, num in enumerate(root):
+                left = num + leaf[idx]
+                right = num + leaf[idx + 1]
+                root[idx] = max([left, right])
+            leaf = root
+            return helper(tree, leaf)
 
-    node = binary_tree[-1]
-    root = binary_tree[-2]
-    idx = -2
-    while len(root) != 1:
-        root = helper(root, node)
-        idx -= 1
-        node = root
-        root = binary_tree[idx]
-    return helper(root, node)
+    leaf = binary_tree.pop(-1)
+    return helper(binary_tree, leaf)[0]
 
 
 def problem_19():
