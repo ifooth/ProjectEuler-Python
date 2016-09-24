@@ -13,13 +13,17 @@ from euler.lib._int import IntX
 
 
 def problem_1():
-    """Multiples of 3 and 5
+    """
+    Multiples of 3 and 5
+    3的倍数和5的倍数
     """
     return sum(i for i in range(1000) if i % 3 == 0 or i % 5 == 0)
 
 
 def problem_2():
-    """Even Fibonacci numbers
+    """
+    Even Fibonacci numbers
+    偶斐波那契数
     """
     fibonacci = [1, 2]
     while fibonacci[-1] < 4000000:
@@ -28,13 +32,17 @@ def problem_2():
 
 
 def problem_3():
-    """Largest prime factor
+    """
+    Largest prime factor
+    最大质因数
     """
     return max(IntX(600851475143).factors_generator())
 
 
 def problem_4():
-    """Largest palindrome product
+    """
+    Largest palindrome product
+    最大回文乘积
     """
     all_numbers = map(
         lambda x: x[0] * x[1],
@@ -43,7 +51,9 @@ def problem_4():
 
 
 def problem_5():
-    """Smallest multiple
+    """
+    Smallest multiple
+    最小倍数
     """
     factors = {1: 1}
     for i in range(1, 20):
@@ -56,13 +66,16 @@ def problem_5():
 
 def problem_6():
     """Sum square difference
+    平方的和与和的平方之差
     """
     return abs(
         sum(i**2 for i in range(1, 101)) - sum(i for i in range(1, 101)) ** 2)
 
 
 def problem_7():
-    """10001st prime
+    """
+    10001st prime
+    第10001个素数
     """
     count, num = 2, 3
     while count != 10001:
@@ -73,7 +86,9 @@ def problem_7():
 
 
 def problem_8():
-    """Largest product in a series
+    """
+    Largest product in a series
+    连续数字最大乘积
     """
     num_str = map(
         lambda x: int(x), ''.join(data.problem8.strip().splitlines()))
@@ -83,10 +98,15 @@ def problem_8():
 
 
 def problem_9():
-    for i in range(1,1000):
-        for j in range(i,1000):
-            if i**2+j**2==(1000-i-j)**2:
-                return i*j*(1000-i-j)
+    """
+    Special Pythagorean triplet
+    特殊毕达哥拉斯三元组
+    """
+    for i in range(1, 1000):
+        for j in range(i, 1000):
+            if i**2 + j**2 == (1000 - i - j)**2:
+                return i * j * (1000 - i - j)
+
 
 def problem_10():
     return sum(i for i in range(3,2000000,2) if ext.XInt(i).isPrime())+2
