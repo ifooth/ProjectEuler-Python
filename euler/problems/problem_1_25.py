@@ -66,7 +66,7 @@ def problem_5():
             if key not in factors or value > factors[key]:
                 factors[key] = value
     return functools.reduce(
-        operator.mul, (key**value for key, value in factors.items()))
+        operator.mul, (key ** value for key, value in factors.items()))
 
 
 def problem_6():
@@ -74,7 +74,7 @@ def problem_6():
     平方的和与和的平方之差
     """
     return abs(
-        sum(i**2 for i in range(1, 101)) - sum(i for i in range(1, 101)) ** 2)
+        sum(i ** 2 for i in range(1, 101)) - sum(i for i in range(1, 101)) ** 2)
 
 
 def problem_7():
@@ -108,7 +108,7 @@ def problem_9():
     """
     for i in range(1, 1000):
         for j in range(i, 1000):
-            if i**2 + j**2 == (1000 - i - j)**2:
+            if i ** 2 + j ** 2 == (1000 - i - j) ** 2:
                 return i * j * (1000 - i - j)
 
 
@@ -215,11 +215,19 @@ def problem_14():
 
 
 def problem_15():
-    return math.factorial(40)//(math.factorial(20)**2)
+    """
+    Lattice paths
+    网格路径
+    """
+    return math.factorial(40) // (math.factorial(20) ** 2)
 
 
 def problem_16():
-    return sum(int(i) for i in str(2**1000))
+    """
+    Power digit sum
+    幂的数字和
+    """
+    return sum(map(int, str(2 ** 1000)))
 
 
 def problem_17():
