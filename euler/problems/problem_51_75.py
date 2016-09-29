@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
+from collections import Counter
+import itertools
 import logging
+import math
+
+from euler.lib import data
+from euler.lib import _int
+
 
 LOG = logging.getLogger(__name__)
 
-from euler.lib import data
-import math
-import itertools
-import string
-from collections import Counter
 
 def eight_prime_family(prime,rd):
     c=0
@@ -283,12 +285,17 @@ def problem_67():
 
 
 def problem_70():
-    t_result=100
-    for i in range(1,10000000):
-        #i_result=min((t_result,(i/lib_math.phi(i) if sorted(str(i))==sorted(str(lib_math.phi(i))))))
-        if sorted(str(i))==sorted(str(ext.EInt(i).phi())):
-            t_result=min(t_result,i/ext.EInt(i).phi())
-    return t_result
+    """
+    Totient permutation
+    欧拉总计函数与重排
+    """
+    min_result = 0
+    for i in range(1, 10 ** 7):
+        phi = _int.phi(i)
+        if sorted(str(i)) == sorted(str(phi)):
+            min_result = min(min_result, i / phi)
+    return min_result
+
 
 def problem_71():
     a=[1,1]

@@ -6,6 +6,7 @@ Project-Euler
  Introduction
 -------------
 http://projecteuler.net/
+[http://pe-cn.github.io/(chinese)](http://pe-cn.github.io/)
 
 Project Euler is a website dedicated to a series of computational problems intended to be solved with computer programs. The project attracts adults and students interested in mathematics and computer programming. Here we will solve them using Python with purely functional programming style.
 
@@ -20,8 +21,7 @@ tested by python2.7
 
 Windows
 ---------
-run start.bat, input problem_id and start calu
-or run python -m euler problem_id
+run start.bat, input problem_id and start calu or run python -m euler problem_id
 
 Linux
 -------
