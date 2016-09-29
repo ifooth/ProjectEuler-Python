@@ -170,7 +170,14 @@ def problem_35():
 
 
 def problem_36():
-    return sum(i for i in range(1,1000000) if ext.XInt(i).isPalindromic() and ext.XInt(bin(i)).isPalindromic()[:1:-1])
+    """
+    Double-base palindromes
+    双进制回文数
+    """
+    return sum(filter(
+        lambda x: _int.is_palindromic(x) and _int.is_palindromic(bin(x)[2:]),
+        range(1, 1000000)))
+
 
 def problem_37():
     """

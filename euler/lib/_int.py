@@ -28,7 +28,8 @@ def is_prime(num):
 def is_palindromic(num):
     """回文数 9009
     """
-    return str(num) == str(num)[::-1]
+    _num = str(num)
+    return _num == _num[::-1]
 
 
 def is_pandigital(num, n=9):
