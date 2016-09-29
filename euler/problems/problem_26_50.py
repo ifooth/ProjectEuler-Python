@@ -5,8 +5,8 @@ import fractions
 import itertools
 import logging
 
-from euler.lib import *
 from euler.lib import _int
+
 
 LOG = logging.getLogger(__name__)
 
@@ -84,7 +84,7 @@ def problem_31():
     """
     Coin sums
     硬币求和
-    动态规划，背包问题
+    动态规划，背包问题(Knapsack problem)
     """
     target = 200
     coins = [1, 2, 5, 10, 20, 50, 100, 200]
@@ -119,13 +119,21 @@ def problem_32():
 
 
 def problem_33():
-    result=1
-    for i in range(1,10):
-        for j in range(i+1,10):
-            for k in range(1,10):
-                if fractions.Fraction(i*10+j,j*10+k)==fractions.Fraction(i,k):
-                    result*=fractions.Fraction(i,k)
+    """
+    Digit cancelling fractions
+    消去数字的分数
+    平凡解(trivial)/非平凡解(non-trivial)
+    49/98是一个非平凡解, 30/50是一个平凡解
+    x * y / y * z(x < z)
+    """
+    result = 1
+    for i in range(1, 10):
+        for j in range(i + 1, 10):
+            for k in range(1, 10):
+                if fractions.Fraction(i * 10 + j, j * 10 + k) == fractions.Fraction(i, k):  # noqa
+                    result *= fractions.Fraction(i, k)
     return result.denominator
+
 
 def problem_34():
     i_fact=[1,1,2,6,24,120,720,5040,40320,362880]
