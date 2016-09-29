@@ -84,6 +84,7 @@ def problem_31():
     """
     Coin sums
     硬币求和
+    动态规划，背包问题
     """
     target = 200
     coins = [1, 2, 5, 10, 20, 50, 100, 200]
@@ -95,18 +96,31 @@ def problem_31():
 
 
 def problem_32():
-    i_num='123456789'
-    a=set()
-    for k in range(1,3):
-        for i in itertools.permutations(i_num,k):
-            i_temp=int(''.join(i))
-            temp=''.join([s for s in i_num if s not in str(i_temp)])
-            if k==1:m=4
-            else:m=3
-            for j in itertools.permutations(temp,m):
-                j_temp=int(''.join(j))
-                if utilities.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp)
+    """
+    Pandigital products
+    全数字的乘积
+    """
+    # 1, 判断全数字
+    # 2, 找出一个数字所有2个因子的乘积 - 因数分解
+    # 3，遍历所以9位数字
+    i_num = '123456789'
+    a = set()
+    for i in range(408, 9876543 + 1):
+        num = int(''.join(i))
+        divisors = _int.proper_divisors(num)
+        while divisors:
+            last = divisors.pop(-1)
+            mod = num // last
+            if mod in divisors:
+                print str(last) + str(mod) +
+                if _int.is_pandigital(str(last) + str(mod) + str(num)):
+                    print last, mod
+                    a.add(last * mod)
+                else:
+                    divisors.remove(mod)
+                break
     return sum(a)
+
 
 def problem_33():
     result=1
