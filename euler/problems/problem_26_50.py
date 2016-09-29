@@ -99,27 +99,23 @@ def problem_32():
     """
     Pandigital products
     全数字的乘积
+    1, 判断全数字
+    2，遍历所以9位数字(Limiting the Search Space)
     """
-    # 1, 判断全数字
-    # 2, 找出一个数字所有2个因子的乘积 - 因数分解
-    # 3，遍历所以9位数字
-    i_num = '123456789'
-    a = set()
-    for i in range(408, 9876543 + 1):
-        num = int(''.join(i))
-        divisors = _int.proper_divisors(num)
-        while divisors:
-            last = divisors.pop(-1)
-            mod = num // last
-            if mod in divisors:
-                print str(last) + str(mod) +
-                if _int.is_pandigital(str(last) + str(mod) + str(num)):
-                    print last, mod
-                    a.add(last * mod)
-                else:
-                    divisors.remove(mod)
-                break
-    return sum(a)
+    pandigital = set()
+    # 1位数 * 4位数
+    for i in range(1, 9 + 1):
+        for j in range(1234, 9876 + 1):
+            num = i * j
+            if _int.is_pandigital(str(i) + str(j) + str(num)):
+                pandigital.add(num)
+    # 2位数 * 3位数
+    for i in range(12, 98 + 1):
+        for j in range(123, 987 + 1):
+            num = i * j
+            if _int.is_pandigital(str(i) + str(j) + str(num)):
+                pandigital.add(num)
+    return sum(pandigital)
 
 
 def problem_33():

@@ -31,6 +31,19 @@ def is_palindromic(num):
     return str(num) == str(num)[::-1]
 
 
+def is_pandigital(num, n=9):
+    """
+    Pandigital number
+    全数字
+    """
+    n_letters = '123456789'
+    str_num = str(num)
+    set_num = set(str_num)
+    if len(str_num) != len(set_num):
+        return False
+    return n_letters[:n] == ''.join(sorted(set_num))
+
+
 def factors_generator(num):
     """因子生成器
     12 = 1 * 2 * 2 * 3
@@ -106,18 +119,6 @@ def fibonacci_generator(fib_1=1, fib_2=1):
         fib_1 = fib_2
         fib_2 = fib_n
         yield fib_n
-
-
-def is_pandigital(num, n=9):
-    """
-    全数字
-    """
-    n_letters = '123456789'
-    str_num = str(num)
-    set_num = set(str_num)
-    if len(str_num) != len(set_num):
-        return False
-    return n_letters[:n] == ''.join(sorted(set_num))
 
 
 def phi(num):
