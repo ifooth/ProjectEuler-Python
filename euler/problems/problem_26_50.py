@@ -379,11 +379,34 @@ def problem_48():
         i_result=int(str(i_result+int(str(i**i)[:-11:-1][::-1]))[:-11:-1][::-1])
     return i_result
 
+
 def problem_49():
-    a=[i for i in ext.XInt(10000).sievePrime() if i>1000]
-    for i in a:
-        if i+3330 in a and i+6660 in a and sorted(str(i))==sorted(str(i+3330))==sorted(str(i+6660)) and i!=1487:
-            return (str(i)+str(i+3330)+str(i+6660))
+    """
+    Prime permutations
+    素数重排
+    """
+    prime_permutations = {}
+    primes = list(
+        itertools.takewhile(lambda x: x < 10000, _int.prime_sieve()))
+    for i in primes:
+        key = ''.join(sorted(str(i)))
+        if key == '1478':
+            continue
+        if key != 4:
+            continue
+        if key in prime_permutations:
+            prime_permutations[key].append(i)
+        else:
+            prime_permutations[key] = [i]
+
+    for key, primes in prime_permutations.items():
+        if len(primes) < 3:
+            continue
+        for i in range(len(primes) - 2):
+            permutations = primes[i: i + 3]
+            if permutations[2] - permutations[1] == permutations[1] - permutations[0]:  # noqa
+                LOG.debug('prime_permutations %s', permutations)
+                return ''.join(map(str, permutations))
 
 
 def problem_50():
