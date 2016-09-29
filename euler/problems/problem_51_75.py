@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
+from collections import Counter
+import itertools
 import logging
+import math
+
+from euler.lib import data
+from euler.lib import _int
+
 
 LOG = logging.getLogger(__name__)
 
-from euler.lib import data
-import math
-import itertools
-import string
-from collections import Counter
 
 def eight_prime_family(prime,rd):
     c=0
@@ -283,12 +285,29 @@ def problem_67():
 
 
 def problem_70():
-    t_result=100
-    for i in range(1,10000000):
-        #i_result=min((t_result,(i/lib_math.phi(i) if sorted(str(i))==sorted(str(lib_math.phi(i))))))
-        if sorted(str(i))==sorted(str(ext.EInt(i).phi())):
-            t_result=min(t_result,i/ext.EInt(i).phi())
-    return t_result
+    """
+    Totient permutation
+    欧拉总计函数与重排
+    result = p1 * p2 * p3 * pr / (p1 - 1) * (p2 -1) * (p3 -1) * (pr - 1)
+    为了result最小，分母需要最小，最小是两个数值
+    > num / phi = p1 * p2 / (p1 - 1) * (p2 * 1)
+    > phi = max((p1 -1) * (p2 * 2))
+    """
+    min_result = 10000000
+    min_num = 0
+    primes = [i for i in itertools.takewhile(lambda x: x <= 5000, _int.prime_sieve()) if i > 2000]
+    for i in itertools.combinations(primes, 2):
+        num = i[0] * i[1]
+        if num > 10000000:
+            continue
+        phi = (i[0] - 1) * (i[1] - 1)
+        if sorted(str(num)) == sorted(str(phi)):
+            radio = num * 1.0 / phi
+            if min_result > radio:
+                min_num = num
+                min_result = radio
+    return min_num
+
 
 def problem_71():
     a=[1,1]
