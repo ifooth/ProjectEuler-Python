@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-import collections
 import functools
 import itertools
 import logging
@@ -54,10 +53,11 @@ def factors(num):
     因数分解 12 = 1^1 * 2^2 * 3^1
     return {1: 1, 2: 2, : 3: 1}
     """
-    counter = collections.Counter(factors_generator(num))
-    result = dict(counter)
-    LOG.debug('%s factors is: %s', num, result)
-    return result
+    _factors = {}
+    for i in factors_generator(num):
+        _factors[i] = _factors.get(i, 0) + 1
+    LOG.debug('%s factors is: %s', num, _factors)
+    return _factors
 
 
 def positive_divisors(num):
@@ -115,4 +115,21 @@ def phi(num):
     return functools.reduce(
         operator.mul,
         map(lambda x: x[0] ** (x[1] -1) * (x[0] - 1), _factors.items()))
+
+
+def prime_sieve(end):
+    """
+    查找一个区间内的素数
+    算法：Sieve of Eratosthenes
+    https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+    start >= 2
+    """
+    num_range = list(range(2, end + 1))
+    num_range = filter(lambda x: x % 2 != 0 or x > 2, num_range)
+    yield 2
+    while num_range:
+        prime = num_range.pop(0)
+        num_range = filter(lambda x: x % prime != 0, num_range)
+        yield prime
+
 

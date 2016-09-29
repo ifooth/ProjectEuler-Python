@@ -288,13 +288,25 @@ def problem_70():
     """
     Totient permutation
     欧拉总计函数与重排
+    result = p1 * p2 * p3 * pr / (p1 - 1) * (p2 -1) * (p3 -1) * (pr - 1)
+    为了result最小，分母需要最小，最小是两个数值
+    > num / phi = p1 * p2 / (p1 - 1) * (p2 * 1)
+    > phi = max((p1 -1) * (p2 * 2))
     """
-    min_result = 0
-    for i in range(1, 10 ** 7):
-        phi = _int.phi(i)
-        if sorted(str(i)) == sorted(str(phi)):
-            min_result = min(min_result, i / phi)
-    return min_result
+    min_result = 10000000
+    min_num = 0
+    primes = [i for i in _int.prime_sieve(5000) if i > 2000]
+    for i in itertools.combinations(primes, 2):
+        num = i[0] * i[1]
+        if num > 10000000:
+            continue
+        phi = (i[0] - 1) * (i[1] - 1)
+        if sorted(str(num)) == sorted(str(phi)):
+            radio = num * 1.0 / phi
+            if min_result > radio:
+                min_num = num
+                min_result = radio
+    return min_num
 
 
 def problem_71():
