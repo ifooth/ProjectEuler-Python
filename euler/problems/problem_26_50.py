@@ -210,22 +210,29 @@ def problem_37():
 
 
 def problem_38():
-    s_temp=['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    i_generator=iter(''.join(i) for i in itertools.permutations('123456789',8) if int(''.join(i))>18273645)
-    s_ans=918273645
-    for i in range(9234,9876):
-        i_temp=str(i)+str(i*2)
-        if sorted(i_temp)==s_temp and s_ans<int(i_temp):s_ans=int(i_temp)
-    for i in range(912,987):
-        i_temp=str(i)+str(i*2)
-        if sorted(i_temp)==s_temp and s_ans<int(i_temp):s_ans=int(i_temp)
-    for i in range(91,98):
-        i_temp=str(i)+str(i*2)
-        if sorted(i_temp)==s_temp and s_ans<int(i_temp):s_ans=int(i_temp)
-    for i in range(9,11):
-        i_temp=str(i)+str(i*2)
-        if sorted(i_temp)==s_temp and s_ans<int(i_temp):s_ans=int(i_temp)
-    return s_ans
+    """
+    Pandigital multiples
+    全数字的倍数
+    """
+    s_temp = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    max_pandigital = 918273645
+    for i in range(9234, 9876):
+        i_temp = str(i) + str(i * 2)
+        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
+            max_pandigital = int(i_temp)
+    for i in range(912, 987):
+        i_temp = str(i) + str(i * 2)
+        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
+            max_pandigital = int(i_temp)
+    for i in range(91, 98):
+        i_temp = str(i) + str(i * 2)
+        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
+            max_pandigital = int(i_temp)
+    for i in range(9, 11):
+        i_temp = str(i) + str(i * 2)
+        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
+            max_pandigital = int(i_temp)
+    return max_pandigital
 
 def problem_39():
 
@@ -378,16 +385,25 @@ def problem_49():
         if i+3330 in a and i+6660 in a and sorted(str(i))==sorted(str(i+3330))==sorted(str(i+6660)) and i!=1487:
             return (str(i)+str(i+3330)+str(i+6660))
 
+
 def problem_50():
-    i_list=ext.XInt(1000000).sievePrime()
-    a=itertools.accumulate(i_list)
-    a=[i for i in a if i<1000000]
-    for k in a[-1:]:
-        j=0
-        while k>953:
-            if ext.XInt(k).isPrime():
-                return k
-            k=k-i_list[j]
-            j+=1
+    """
+    Consecutive prime sum
+    连续素数的和
+    """
+    consecutive_prime = []
+    all_prime = list(
+        itertools.takewhile(lambda x: x < 1000000, _int.prime_sieve()))
+    # 分析上限
+    max_count = 0
+    prime_sum = 0
+    while prime_sum < 1000000:
+        prime_sum += all_prime[max_count]
+        max_count += 1
 
-
+    for i in range(max_count, 0, -1):
+        for j in range(max_count - i):
+            consecutive_prime = all_prime[j: i + j]
+            if sum(consecutive_prime) in all_prime:
+                LOG.debug('consecutive_prime %s', consecutive_prime)
+                return sum(consecutive_prime)
