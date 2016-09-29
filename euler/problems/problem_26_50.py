@@ -181,22 +181,32 @@ def problem_36():
 
 def problem_37():
     """
+    Truncatable primes
+    可截素数
     http://en.wikipedia.org/wiki/Truncatable_prime
-    http://en.wikipedia.org/wiki/List_of_prime_numbers
-    2, 3, 5, 7, 23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397
     """
-    i_sum=set()
-    n=0
-    for i in itertools.count(11,2):
-        temp=str(i)
-        if '1' in temp[0]+temp[-1] or '9' in temp[0]+temp[-1] or '0' in temp or '4' in temp or '6' in temp or '8' in temp:continue
-        for k in range(1,len(temp)):
-            if not(ext.XInt(int(temp[:k+1])) and ext.XInt(int(temp[k:]))):break
+    count = 0
+    truncatable_prime = []
+    for prime in _int.prime_sieve():
+        if prime in [2, 3, 5, 7]:
+            continue
+        left_prime = list(str(prime)[1:])
+        while left_prime:
+            if not _int.is_prime(int(''.join(left_prime))):
+                break
+            left_prime.pop(0)
         else:
-            i_sum.add(temp)
-            n+=1
-        if n==11:break
-    return sum(int(i) for i in i_sum)
+            right_prime = list(str(prime)[:-1])
+            while right_prime:
+                if not _int.is_prime(int(''.join(right_prime))):
+                    break
+                right_prime.pop(-1)
+            else:
+                LOG.debug('truncatable_prime %s', prime)
+                count += 1
+                truncatable_prime.append(prime)
+                if count == 11:
+                    return sum(truncatable_prime)
 
 
 def problem_38():
