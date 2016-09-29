@@ -4,6 +4,7 @@
 import fractions
 import itertools
 import logging
+import math
 
 from euler.lib import _int
 
@@ -136,9 +137,16 @@ def problem_33():
 
 
 def problem_34():
-    i_fact=[1,1,2,6,24,120,720,5040,40320,362880]
-    #return sum(filter(lambda x:x==sum(i_fact[int(i)] for i in str(x)),range(3,400000)))
-    return sum(i for i in range(3,400000) if sum(i_fact[int(j)] for j in str(i))==i)
+    """
+    Digit factorials
+    各位数字的阶乘
+    分析范围:
+    [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
+    上限 9! * 7(还是没懂)
+    """
+    factorials = [math.factorial(i) for i in range(0, 10)]
+    return sum(i for i in range(3, math.factorial(9) * 7) if sum(factorials[int(j)] for j in str(i)) == i)  # noqa
+
 
 def problem_35():
     num=0
