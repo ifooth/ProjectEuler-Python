@@ -1,20 +1,24 @@
-import os
-
+# -*- coding: utf-8 -*-
+# Copyright 2016 Tencent
+# Author: Joe Lei <joelei@tencent.com>
 from distutils.core import setup
 
+
 packages, data_files = [], []
-  
+
+
 with open('README.md') as fp:
     long_description = fp.read()
 
+
 setup(
-    name='project-euler-python',
+    name='ProjectEuler-Python',
     version='0.0.3',
     description='project euler problem solve by python',
     long_description=long_description,
     author='Joe Lei',
     author_email='thezero12@hotmail.com',
-    url='https://github.com/ifooth/project-euler-python',
+    url='https://github.com/ifooth/ProjectEuler-Python',
     packages=['euler'],
     classifiers = [
         'Development Status :: 4 - Beta',
@@ -23,10 +27,7 @@ setup(
         'License :: OSI Approved :: Python Software Foundation License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
         'Topic :: Scientific/Engineering :: Mathematics',
    ],
 )
