@@ -149,27 +149,25 @@ def problem_34():
 
 
 def problem_35():
-    num=0
-    for i in range(100,1000000):
-        if any(j in str(i) for j in ['0','2','4','6','8']):continue
-        k,temp=0,i
-        while k<len(str(i)):
-            temp=int(str(temp)[1::1]+str(temp)[0])
-            if not ext.XInt(temp).isPrime():break
-            k+=1
-        else:num+=1
-    return num+13
     """
-    n=0
-    for i in range(100,1000000):
-        for j in itertools.permutations(str(i),len(str(i))):
-            if len(j)!=len(str(i)) or not ext.XInt(int(''.join(j))):break
+    Circular primes
+    圆周素数
+    """
+    total_count = 13
+    for num in range(100, 1000000):
+        num = str(num)
+        if any(i in num for i in '02468'):
+            continue
+        num_length = len(num)
+        while num_length:
+            num = num[1:] + num[0]
+            if not _int.is_prime(int(num)):
+                break
+            num_length -= 1
         else:
-            n+=1
-            print(locals())
-    return n+13
-    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and ext.XInt(int(''.join(j)))))+13
-    """
+            total_count += 1
+    return total_count
+
 
 def problem_36():
     return sum(i for i in range(1,1000000) if ext.XInt(i).isPalindromic() and ext.XInt(bin(i)).isPalindromic()[:1:-1])
