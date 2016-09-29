@@ -117,19 +117,22 @@ def phi(num):
         map(lambda x: x[0] ** (x[1] -1) * (x[0] - 1), _factors.items()))
 
 
-def prime_sieve(end):
+def prime_sieve():
     """
     查找一个区间内的素数
     算法：Sieve of Eratosthenes
-    https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-    start >= 2
+    根据性质：一个素数的各个倍数，是一个差为此素数本身的等差数列
     """
-    num_range = list(range(2, end + 1))
-    num_range = filter(lambda x: x % 2 != 0 or x > 2, num_range)
-    yield 2
-    while num_range:
-        prime = num_range.pop(0)
-        num_range = filter(lambda x: x % prime != 0, num_range)
-        yield prime
-
-
+    composites = {}
+    for num in itertools.count(2):
+        prime = composites.pop(num, None)
+        if prime is None:
+            yield num  # num是一个素数
+            composites[num * num] = num
+            LOG.debug('%s, composites: %s', num, composites)
+        else:
+            composite = num + prime  # num是一个合数
+            while composite in composites:
+                composite += prime
+            composites[composite] = prime
+            LOG.debug('%s, composites: %s', num, composites)

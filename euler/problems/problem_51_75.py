@@ -295,7 +295,7 @@ def problem_70():
     """
     min_result = 10000000
     min_num = 0
-    primes = [i for i in _int.prime_sieve(5000) if i > 2000]
+    primes = [i for i in itertools.takewhile(lambda x: x <= 5000, _int.prime_sieve()) if i > 2000]
     for i in itertools.combinations(primes, 2):
         num = i[0] * i[1]
         if num > 10000000:

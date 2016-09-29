@@ -14,7 +14,7 @@ LOGGING_CONFIG = {
     },
     'handlers': {
         'console_simple': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
@@ -22,7 +22,7 @@ LOGGING_CONFIG = {
     'loggers': {
         'euler': {
             'handlers': ['console_simple'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
     }

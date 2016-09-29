@@ -5,6 +5,7 @@ from timeit import Timer
 import logging
 import os.path
 import sys
+import itertools
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -19,7 +20,9 @@ LOG = logging.getLogger(__file__)
 
 
 def run_timer(num):
-    print [i for i in _int.prime_sieve(2, 30000)]
+    #s = [i for i in _int.prime_sieve(30000)]
+    s = [i for i in itertools.takewhile(lambda x: x < 22, _int.prime_sieve2())]
+    print len(s), s[-1], s
 
 
 if __name__=="__main__":
