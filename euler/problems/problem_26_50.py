@@ -2,9 +2,11 @@
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 import fractions
+import functools
 import itertools
 import logging
 import math
+import operator
 
 from euler.lib import _int
 from euler.lib import data
@@ -262,12 +264,19 @@ def problem_39():
     return i_result
     """
 
+
 def problem_40():
-    i_str=''
+    """
+    Champernowne’s constant
+    钱珀瑙恩常数
+    """
+    champernowne = ''
     for i in itertools.count(1):
-        i_str+=str(i)
-        if len(i_str)>=1000000:
-            return int(i_str[0])*int(i_str[10-1])*int(i_str[100-1])*int(i_str[1000-1])*int(i_str[10000-1])*int(i_str[100000-1])*int(i_str[1000000-1])
+        champernowne += str(i)
+        if len(champernowne) >= 1000000:
+            return functools.reduce(
+                operator.mul,
+                map(int, [champernowne[10 ** i - 1] for i in range(1, 7)]))
 
 
 def problem_41():
