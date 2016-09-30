@@ -353,9 +353,12 @@ def problem_45():
         solution = (1 + math.sqrt(1 + 8 * x)) / 4.0
         return int(solution) == solution
 
-    for i in itertools.count(40756):
-        if triangle(i) and pentagonal(i) and hexagonal(i):
-            return i
+    num = 286
+    while True:
+        _triangle = num * (num + 1) / 2
+        if pentagonal(_triangle) and hexagonal(_triangle):
+            return _triangle
+        num += 1
 
 
 def problem_46():
