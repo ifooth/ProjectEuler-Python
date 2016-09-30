@@ -216,26 +216,12 @@ def problem_38():
     """
     Pandigital multiples
     全数字的倍数
+    分析：n=2
     """
-    s_temp = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    max_pandigital = 918273645
-    for i in range(9234, 9876):
-        i_temp = str(i) + str(i * 2)
-        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
-            max_pandigital = int(i_temp)
-    for i in range(912, 987):
-        i_temp = str(i) + str(i * 2)
-        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
-            max_pandigital = int(i_temp)
-    for i in range(91, 98):
-        i_temp = str(i) + str(i * 2)
-        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
-            max_pandigital = int(i_temp)
-    for i in range(9, 11):
-        i_temp = str(i) + str(i * 2)
-        if sorted(i_temp) == s_temp and max_pandigital < int(i_temp):
-            max_pandigital = int(i_temp)
-    return max_pandigital
+    for i in range(9876, 9234, -1):
+        num = str(i) + str(i * 2)
+        if _int.is_pandigital(int(num)):
+            return num
 
 
 def problem_39():
