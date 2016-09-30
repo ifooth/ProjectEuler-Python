@@ -7,6 +7,7 @@ import logging
 import math
 
 from euler.lib import _int
+from euler.lib import data
 
 
 LOG = logging.getLogger(__name__)
@@ -283,23 +284,18 @@ def problem_41():
         i+=1
     return i_result
     """
-def problem_42():
-    f_word=list(i.strip('"') for i in next(data.openfile('words.txt')).strip().split(','))
-    #print(locals())
-    d_dict=dict(zip((i for i in f_word),((sum(ord(j) for j in i)-len(i)*64) for i in f_word)))
-    b_set=set(n*(n+1)//2 for n in range(1,int((int(max(d_dict.values())*2)**0.5))))
-    return sum(1 for i in d_dict.values() if i in b_set)
-    """
-    f_len=max(len(i) for i in f_word)
-    i_result=0
-    d_dict=dict(zip((chr(i) for i in range(65,91)),(i for i in range(1,27))))
-    b_set=set(n*(n+1)//2 for n in range(1,int((f_len*27*2)**0.5)))
 
-    for j in f_word:
-        if sum(d_dict[k] for k in j) in b_set:i_result+=1
-        #print(sum(ord(k) for k in j))
-    return i_result
+
+def problem_42():
     """
+    Coded triangle numbers
+    编码三角形数
+    """
+    words = [i.strip('"') for i in data.get_file('words.txt').split(',')]
+    words_ord_sum = map(
+        lambda word: sum(map(lambda x: ord(x) - 64, word)),
+        words)
+    return len(filter(lambda x: _int.is_triangle(x), words_ord_sum))
 
 
 def problem_43():
