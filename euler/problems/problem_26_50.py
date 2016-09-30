@@ -271,19 +271,17 @@ def problem_40():
 
 
 def problem_41():
-    s_num="123456789"
-    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if ext.XInt(int(''.join(i))))
     """
-    i=4
-    i_result=0
-    while i!=10:
-        for k in itertools.permutations(s_num[0:i],i):
-            a=''
-            temp=int(a.join(k))
-            if ext.XInt(temp) and temp>i_result:i_result=temp
-        i+=1
-    return i_result
+    Pandigital prime
+    全数字的素数
     """
+    letters = '123456789'
+    for i in range(9, 0, -1):
+        _letters = letters[:i][::-1]
+        for j in itertools.permutations(_letters, i):
+            num = int(''.join(j))
+            if _int.is_prime(num):
+                return num
 
 
 def problem_42():
