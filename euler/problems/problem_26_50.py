@@ -343,17 +343,21 @@ def problem_45():
     return i_iter.__next__()
     """
 
+
 def problem_46():
-    n = 5
-    f = 1
-    primes = set()
-    while (1):
-        if all( n % p for p in primes ):
-            primes.add(n)
+    """
+    Goldbach’s other conjecture
+    哥德巴赫的另一个猜想
+    """
+    n = 33
+    primes = []
+    while True:
+        if all(n % p for p in primes):
+            primes.append(n)
         else:
-            if not any( (n-2*i*i) in primes for i in range(1, n) ):break
-        n += 3-f
-        f = -f
+            if not any((n - 2 * i * i) in primes for i in range(1, n)):
+                break
+        n += 2
     return n
 
 
