@@ -373,11 +373,13 @@ def problem_47():
             continue
         else:return i
 
+
 def problem_48():
-    i_result=0
-    for i in range(1,1001):
-        i_result=int(str(i_result+int(str(i**i)[:-11:-1][::-1]))[:-11:-1][::-1])
-    return i_result
+    """
+    Self powers
+    自幂
+    """
+    return str(sum(i ** i for i in range(1, 1001)))[-10:]
 
 
 def problem_49():
