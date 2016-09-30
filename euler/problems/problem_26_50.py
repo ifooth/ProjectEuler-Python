@@ -301,31 +301,27 @@ def problem_42():
     return i_result
     """
 
+
 def problem_43():
-    s_num='0123456789'
-    i_sum=0
-    l_list=[2,3,5,7,11,13,17]
-    for i in itertools.permutations(s_num,10):
-        k=''
-        s_str=k.join(i).lstrip('0')
-        if len(s_str)==9:continue
-        m=0
-        while m!=7:
-            if int(s_str[m+1:m+4])%l_list[m]!=0:
+    """
+    Sub-string divisibility
+    子串的可整除性
+    """
+    letters = '0123456789'
+    sum_sub = 0
+    primes = [2, 3, 5, 7, 11, 13, 17]
+    for letter in itertools.permutations(letters, 10):
+        if letter[0] == '0':
+            continue
+        num = ''.join(letter)
+        m = 0
+        while m != 7:
+            if int(num[m + 1: m + 4]) % primes[m] != 0:
                 break
-            m+=1
-        else:i_sum+=int(s_str)
-        """
-        if int(s_str[1:4])%2!=0:continue
-        elif int(s_str[2:5])%3!=0:continue
-        elif int(s_str[3:6])%5!=0:continue
-        elif int(s_str[4:7])%7!=0:continue
-        elif int(s_str[5:8])%11!=0:continue
-        elif int(s_str[6:9])%13!=0:continue
-        elif int(s_str[7:10])%17!=0:continue
-        else:i_sum+=int(s_str)
-        """
-    return i_sum
+            m += 1
+        else:
+            sum_sub += int(num)
+    return sum_sub
 
 
 def problem_44():
