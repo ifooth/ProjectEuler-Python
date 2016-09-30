@@ -327,13 +327,22 @@ def problem_43():
         """
     return i_sum
 
+
 def problem_44():
-    p2=0  #just a bug
-    pairs=((p1,p2)  for (n1,p1) in ((n,utilities.pentagonal(n)) for n in itertools.count(0))
-           for p2 in (utilities.pentagonal(n) for n in range(1,n1))
-           if euler_ceil.is_pentagonal(p1-p2) and euler_ceil.is_pentagonal(p1+p2))
-    p1,p2=next(pairs)
-    return p1-p2
+    """
+    Pentagon numbers
+    五边形数
+    第一个即最小的
+    """
+    pentagon_numbers = []
+    for n in itertools.count(1):
+        pentagon = _int.pentagon(n)
+        for i in pentagon_numbers:
+            difference = pentagon - i
+            if _int.is_pentagon(i + pentagon) and _int.is_pentagon(difference):
+                LOG.debug('pentagon %s, %s', i, pentagon)
+                return difference
+        pentagon_numbers.append(pentagon)
 
 
 def problem_45():
@@ -341,22 +350,10 @@ def problem_45():
     Triangular, pentagonal, and hexagonal
     三角形数、五边形数和六角形数
     """
-    def triangle(x):
-        solution = (-1 + math.sqrt((1 + 8 * x))) / 2.0
-        return int(solution) == solution
-
-    def pentagonal(x):
-        solution = (1 + math.sqrt(1 + 24 * x)) / 6.0
-        return int(solution) == solution
-
-    def hexagonal(x):
-        solution = (1 + math.sqrt(1 + 8 * x)) / 4.0
-        return int(solution) == solution
-
     num = 286
     while True:
-        _triangle = num * (num + 1) / 2
-        if pentagonal(_triangle) and hexagonal(_triangle):
+        _triangle = _int.triangle(num)
+        if _int.is_pentagon(_triangle) and _int.is_hexagon(_triangle):
             return _triangle
         num += 1
 

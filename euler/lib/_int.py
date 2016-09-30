@@ -150,3 +150,48 @@ def prime_sieve():
                 composite += prime
             composites[composite] = prime
             LOG.debug('%s, composites: %s', num, composites)
+
+
+def triangle(num):
+    """
+    三角形数
+    """
+    return num * (num + 1) / 2
+
+
+def pentagon(num):
+    """
+    五边形数
+    """
+    return num * (3 * num - 1) / 2
+
+
+def hexagon(num):
+    """
+    六边形数
+    """
+    return num * (2 * num - 1)
+
+
+def is_triangle(num):
+    """
+    判断三角形数
+    """
+    solution = (-1 + math.sqrt((1 + 8 * num))) / 2.0
+    return int(solution) == solution
+
+
+def is_pentagon(num):
+    """
+    判断五边形数
+    """
+    solution = (1 + math.sqrt(1 + 24 * num)) / 6.0
+    return int(solution) == solution
+
+
+def is_hexagon(num):
+    """
+    判断六边形数
+    """
+    solution = (1 + math.sqrt(1 + 8 * num)) / 4.0
+    return int(solution) == solution
