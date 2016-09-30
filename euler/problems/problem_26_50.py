@@ -335,13 +335,27 @@ def problem_44():
     p1,p2=next(pairs)
     return p1-p2
 
+
 def problem_45():
-    return (a for a in (utilities.hexagonal(n) for n in itertools.count(143+1)) if euler_ceil.is_pentagonal(a)).__next__()
     """
-    i_iter=(a for (n,a) in ((n,utilities.triangle(n)) for n in itertools.count(285+1)) for (i,b) in ((i,utilities.pentagonal(i)) for i in range(165,n)) for c in (utilities.hexagonal(j) for j in range(143,i)) if a==b==c)
-    #i_iter.__next__()
-    return i_iter.__next__()
+    Triangular, pentagonal, and hexagonal
+    三角形数、五边形数和六角形数
     """
+    def triangle(x):
+        solution = (-1 + math.sqrt((1 + 8 * x))) / 2.0
+        return int(solution) == solution
+
+    def pentagonal(x):
+        solution = (1 + math.sqrt(1 + 24 * x)) / 6.0
+        return int(solution) == solution
+
+    def hexagonal(x):
+        solution = (1 + math.sqrt(1 + 8 * x)) / 4.0
+        return int(solution) == solution
+
+    for i in itertools.count(40756):
+        if triangle(i) and pentagonal(i) and hexagonal(i):
+            return i
 
 
 def problem_46():
