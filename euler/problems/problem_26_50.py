@@ -356,22 +356,22 @@ def problem_46():
         f = -f
     return n
 
+
 def problem_47():
-    i=642
-    while True:
-        if len(ext.XInt(i).factors())-1!=4:
-            i+=1
-            continue
-        elif len(ext.XInt(i).factors())-1!=4:
-            i+=2
-            continue
-        elif len(ext.XInt(i).factors())-1!=4:
-            i+=3
-            continue
-        elif len(ext.XInt(i).factors())-1!=4:
-            i+=4
-            continue
-        else:return i
+    """
+    Distinct primes factors
+    不同的质因数
+    """
+    consecutive_number = 1
+    count = 0
+    consecutive = 4
+    while count < consecutive:
+        consecutive_number += 1
+        if len(_int.factors(consecutive_number).keys()) - 1 == consecutive:
+            count += 1
+        else:
+            count = 0
+    return consecutive_number - consecutive + 1
 
 
 def problem_48():
