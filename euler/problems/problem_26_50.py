@@ -237,32 +237,40 @@ def problem_38():
             max_pandigital = int(i_temp)
     return max_pandigital
 
-def problem_39():
 
-    i_iter=iter((x,y,z) for x in range(4,500) for y in range(x,500) for z in range(y,500) if (x**2+y**2)==z**2 and x+y+z<1000)
-    i_dict={}
-    for i in i_iter:
-        if sum(i) not in i_dict:
-            i_dict.update({sum(i):[i]})
-        else:i_dict[sum(i)].append([i])
-    return sum(max((value for value in i_dict.values()),key=len)[0])
+def problem_39():
     """
-    i_result=[0,0]
-    for i in range(4,1000):
-        j,i_num=1,0
-        while j<i//2:
-            k=1
-            while k<(i-j)//2:
-                if j**2+k**2==(i-j-k)**2:
-                    i_num+=1
-                k+=1
-            j+=1
-        #print("the I process is:",i)
-        if i_num>i_result[1]:
-            i_result[0]=i
-            i_result[1]=i_num
-    return i_result
+    nteger right triangles
+    整数边长直角三角形
     """
+    solutions = iter(
+        (x, y, z)
+        for x in range(4, 500)
+        for y in range(x, 500)
+        for z in range(y, 500)
+        if x ** 2 + y ** 2 == z ** 2 and x + y + z <= 1000)
+    max_p = {}
+    for i in solutions:
+        p = sum(i)
+        max_p[p] = max_p.get(p, 0) + 1
+    return max(max_p.items(), key=lambda x: x[1])[0]
+
+    # max_solutions = 0
+    # max_p = 0
+    # for p in range(2, 1001):
+    #     solutions = 0
+    #     for x in range(min(p, 500)):
+    #         for y in range(x, min(p, 500)):
+    #             z = p - x - y
+    #             if z <= 0:
+    #                 break
+    #             if x ** 2 + y ** 2 == z ** 2:
+    #                 solutions += 1
+    #     if solutions > max_solutions:
+    #         max_solutions = solutions
+    #         max_p = p
+
+    return max_p
 
 
 def problem_40():
