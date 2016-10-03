@@ -1,32 +1,43 @@
-'''
-Created on 2012-7-18
+# -*- coding: utf-8 -*-
+# Copyright 2016 IFOOTH
+# Author: Joe Lei <thezero12@hotmail.com>
+import logging
+import itertools
 
-@author: Joe Lei
-'''
-from euler.lib import *
+from euler.lib import _int
+
+LOG = logging.getLogger(__name__)
+
 
 def problem_134():
-    s=[i for i in ext.XInt(1000000).sievePrime() if i>3]
-    #s.append(1000003)
-    #s=[999983,1000003]
-    #s=[19,23]
-    #s=[221,223]
-    s_sum=0
-    for i in range(len(s)-1):
-        result=[]
-        for j in [1,3,5,7,9]:
-            if str(s[i+1]*j)[-1] is str(s[i])[-1]:
-                result.append(j)
-                temp=s[i+1]*j
-                for n in range(2,len(str(s[i]))+1):
-                    for m in [1,2,3,4,5,6,7,8,9]:
-                        if str(m*s[i+1]+int(str(temp)[-n]))[-1] is str(s[i])[-n]:
-                            result.append(m)
-                            temp=temp+m*s[i+1]*(10**(n-1))
-                            break
-        result.reverse()
-        t=''
-        for f in result:
-            t+=str(f)
-        s_sum+=s[i+1]*int(t)
-    print(s_sum)
+    """
+    Prime pair connection
+    质数对连接
+    """
+    sum_prime = 0
+    prime_first = 5
+    count = 0
+    for prime in _int.prime_sieve():
+        if prime <= 5:
+            continue
+        if prime > 1000:
+            break
+        count += 1
+        if count % 1000 == 0:
+            print count, prime
+        # for i in itertools.count(1):
+        #     _prime = int(str(i) + str(prime_first))
+        #     if _prime % prime == 0:
+        #         LOG.debug('%s, %s, %s', prime, _prime, i)
+        #         sum_prime += _prime
+        #         prime_first = prime
+        #         break
+        _count = 0
+        for i in itertools.count(3, 2):
+            _count += 1
+            if str(prime * i).endswith(str(prime_first)):
+                LOG.info('%s, %s, %s', prime, prime * i, i)
+                sum_prime += prime * i
+                prime_first = prime
+                break
+    return sum_prime

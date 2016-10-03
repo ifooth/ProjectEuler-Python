@@ -20,8 +20,14 @@ def eight_prime_family(prime,rd):
         if (n>100000 and intx(n).isPrime()):
             c=c+1
     return c==8
+
+
 def problem_51():
-    for prime in intx(1000000).sievePrime():
+    """
+    Prime digit replacements
+    素数数字替换
+    """
+    for prime in _int.prime_sieve():
         if prime>100000:
             s=str(prime)
             last_digit=s[5:6]
@@ -29,8 +35,18 @@ def problem_51():
                 s.count('1')==3 and last_digit!='1' and eight_prime_family(s,'1') or \
                 s.count('2')==3 and eight_prime_family(s,'2')):return s
 
+
 def problem_52():
-    return (i for i in itertools.count(6) if sorted(str(i))==sorted(str(i*2))==sorted(str(i*3))==sorted(str(i*4))==sorted(str(i*5))==sorted(str(i*6))).__next__()
+    """
+    Permuted multiples
+    重排的倍数
+    """
+    for num in itertools.count(6):
+        sorted_num = sorted(str(num))
+        if any(sorted(str(num * i)) != sorted_num for i in range(2, 7)):
+            continue
+        return num
+
 
 def problem_53():
     return len(list((i,j) for i in range(1,101) for j in range(1,i+1) if math.factorial(i)/(math.factorial(j)*math.factorial(i-j))>1000000))
