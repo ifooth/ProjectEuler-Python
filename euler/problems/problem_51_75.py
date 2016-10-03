@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-from collections import Counter
 import itertools
 import logging
 import math
+import fractions
 
 from euler.lib import data
 from euler.lib import _int
@@ -98,15 +98,18 @@ def problem_56():
 
 
 def problem_57(num=1000):
-    from fractions import Fraction
-    init = Fraction(1,2)
+    """
+    Square root convergents
+    平方根逼近
+    """
+    init = fractions.Fraction(1, 2)
     n = 0
-    for i in range(num-1):
-        init = 1/(2 + init)
-        #log.info(init+1)
-        if len(str((init+1).numerator))>len(str((init+1).denominator)):
-            n+=1
+    for i in range(1000):
+        init = 1 / (2 + init)
+        if len(str((init + 1).numerator)) > len(str((init + 1).denominator)):
+            n += 1
     return n
+
 
 def problem_58(length=None):
     if length:
