@@ -86,12 +86,16 @@ def problem_55():
 
 
 def problem_56():
-    #return sum(int(i) for i in (str(a**b) for a in range(1,100) for b in range(1,100)))
-    i_result=0
-    for i in range(1,100):
-        for j in range(1,100):
-            i_result=max(i_result,sum(int(k) for k in str(i**j)))
-    return i_result
+    """
+    Powerful Digit Sum
+    幂的数字和
+    """
+    max_digit_sum = 0
+    for i in range(1, 100):
+        for j in range(1, 100):
+            max_digit_sum = max(max_digit_sum, sum(map(int, str(i ** j))))
+    return max_digit_sum
+
 
 def problem_57(num=1000):
     from fractions import Fraction
