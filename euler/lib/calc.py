@@ -2,6 +2,7 @@
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 import operator
+import math
 
 
 def accumulate(iterable, func=operator.add):
@@ -20,3 +21,11 @@ def accumulate(iterable, func=operator.add):
     for element in it:
         total = func(total, element)
         yield total
+
+
+def combinations(n, k):
+    """
+    组合数
+    C(n, k) = n! / (k! * (n - k)!) k <= n
+    """
+    return math.factorial(n) / (math.factorial(k) * math.factorial(n - k))

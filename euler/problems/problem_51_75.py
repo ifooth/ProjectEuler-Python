@@ -8,6 +8,7 @@ import math
 
 from euler.lib import data
 from euler.lib import _int
+from euler.lib import calc
 
 
 LOG = logging.getLogger(__name__)
@@ -49,7 +50,17 @@ def problem_52():
 
 
 def problem_53():
-    return len(list((i,j) for i in range(1,101) for j in range(1,i+1) if math.factorial(i)/(math.factorial(j)*math.factorial(i-j))>1000000))
+    """
+    Combinatoric selections
+    组合数选择
+    """
+    count = 0
+    for n in range(1, 101):
+        for k in range(1, n + 1):
+            if calc.combinations(n, k) > 1000000:
+                count += 1
+    return count
+
 
 class poker():
     '''2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace.
