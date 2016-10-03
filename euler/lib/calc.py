@@ -70,23 +70,22 @@ class Poker(object):
         self.values_score = []
         self()
 
-    def _cmp_card(self, x, y):
-        return self.POKERS.index(y[0]) - self.POKERS.index(x[0])
+    @property
+    def sorted_card(self):
+        card = ''.join([i[0] for i in sorted(self.card, cmp=(
+            lambda x, y: self.POKERS.index(x[0]) - self.POKERS.index(y[0])))])
+        return card
 
     def royal_flush(self):
         if len(set([i[1] for i in self.card])) != 1:
             raise NotRanked()
-        card = ''.join(
-            i[0] for i in sorted(self.card, cmp=self._cmp_card))[::-1]
-        if card != 'TJQKA':
+        if self.sorted_card != 'TJQKA':
             raise NotRanked()
 
     def straight_flush(self):
         if len(set([i[1] for i in self.card])) != 1:
             raise NotRanked()
-        card = ''.join(
-            i[0] for i in sorted(self.card, cmp=self._cmp_card))[::-1]
-        if card not in self.POKERS:
+        if self.sorted_card not in self.POKERS:
             raise NotRanked()
 
     def four_of_kind(self):
@@ -102,9 +101,7 @@ class Poker(object):
             raise NotRanked()
 
     def straight(self):
-        card = ''.join(
-            i[0] for i in sorted(self.card, cmp=self._cmp_card))[::-1]
-        if card not in self.POKERS:
+        if self.sorted_card not in self.POKERS:
             raise NotRanked()
 
     def three_of_kind(self):
