@@ -67,19 +67,23 @@ def problem_54():
     return len(filter(lambda x: calc.Poker(x[:5]) > calc.Poker(x[5:]), pokers))
 
 
-
 def problem_55():
-    i_result=0
-    for i in range(1,10000):
-        n=0
-        while n<50:
-            i=i+int((str(i)[::-1]))
-            if ext.EInt(i).isPalindromic():
+    """
+    Lychrel numbers
+    利克瑞尔数
+    """
+    lychrel_numbers = 0
+    for num in range(1, 10000):
+        counter = 0
+        while counter < 50:
+            num = num + int((str(num)[::-1]))
+            if _int.is_palindromic(num):
                 break
-            n+=1
+            counter += 1
         else:
-            i_result+=1
-    return i_result
+            lychrel_numbers += 1
+    return lychrel_numbers
+
 
 def problem_56():
     #return sum(int(i) for i in (str(a**b) for a in range(1,100) for b in range(1,100)))
