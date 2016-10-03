@@ -14,27 +14,25 @@ from euler.lib import calc
 LOG = logging.getLogger(__name__)
 
 
-def eight_prime_family(prime,rd):
-    c=0
-    for digit in '0123456789':
-        n=int(prime.replace(rd,digit))
-        if (n>100000 and intx(n).isPrime()):
-            c=c+1
-    return c==8
-
-
 def problem_51():
     """
     Prime digit replacements
     素数数字替换
     """
+    count = 6
+    primes = []
+    prime_length = 2
+
+    def prime_family(primes):
+        primes = map(lambda x: sorted(str(x)), primes)
+
     for prime in _int.prime_sieve():
-        if prime>100000:
-            s=str(prime)
-            last_digit=s[5:6]
-            if (s.count('0')==3 and eight_prime_family(s,'0') or \
-                s.count('1')==3 and last_digit!='1' and eight_prime_family(s,'1') or \
-                s.count('2')==3 and eight_prime_family(s,'2')):return s
+        _len = len(str(prime))
+        if _len == prime_length:
+            primes.append(prime)
+        if _len > prime_length:
+            prime_family(primes)
+            return primes
 
 
 def problem_52():
@@ -112,9 +110,24 @@ def problem_57(num=1000):
 
 
 def problem_58(length=None):
-    if length:
-        for i in range(length):
-            pass
+    """
+    Spiral primes
+    螺旋素数
+    """
+    last_num = 1
+    prime_count = 0
+    total_num = 1
+    for n in itertools.count(2):
+        length_size = 2 * n - 1
+        for i in range(1, 5):
+            num = last_num + (length_size - 1) * i
+            total_num += 1
+            if _int.is_prime(num):
+                prime_count += 1
+            if prime_count * 1.0 / total_num < 0.1:
+                return length_size
+        last_num = num
+
 
 def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):
     ciphertext=list(data.openfile('cipher1.txt').strip().split(','))
