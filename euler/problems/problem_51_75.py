@@ -129,34 +129,37 @@ def problem_58(length=None):
         last_num = num
 
 
-def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):
-    ciphertext=list(data.openfile('cipher1.txt').strip().split(','))
-    #ciphertext=encipher('leijiaominabc','zzz')
-    #log.info(encipher('leijiaominabc','zzz'))
-    #log.info(ciphertext)
-    log.info(len(ciphertext))
-    texts = ['',0]
-    a,b=divmod(len(ciphertext),keylen)
-    for i in itertools.product(keychars,repeat=keylen):
+def problem_59():
+    """
+    XOR decryption
+    异或解密
+    """
+    keychars = 'abcdefghijklmnopqrstuvwxyz'
+    keylen = 3
+    ciphertext = list(data.get_file('cipher1.txt').strip().split(','))
+    texts = ['', 0]
+    a, b = divmod(len(ciphertext), 3)
+    for i in itertools.product(keychars, repeat=keylen):
         cleartext = ''
         space = 0
         for j in range(a):
             for k in range(keylen):
-                t = int(ciphertext[keylen*j+k])^ord(i[k])
+                t = int(ciphertext[keylen * j + k]) ^ ord(i[k])
                 if t == ord(' '):
                     space += 1
                 cleartext += chr(t)
         if b:
             for k in range(b):
-                t = int(ciphertext[keylen*a+k])^ord(i[k])
+                t = int(ciphertext[keylen * a + k]) ^ ord(i[k])
                 if t == ord(' '):
                     space += 1
                 cleartext += chr(t)
+        # 空格最多的就是解，我操
         if space > texts[1]:
             texts[1] = space
             texts[0] = cleartext
-    log.info(texts)
     return sum([ord(i) for i in texts[0]])
+
 
 def encipher(texts,key):
     #log.info(texts)
