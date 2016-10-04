@@ -162,7 +162,7 @@ def problem_59():
     return sum([ord(i) for i in texts[0]])
 
 
-def problem_62():
+def problem_60():
     """
     Prime pair sets
     素数对的集合
@@ -181,6 +181,72 @@ def problem_62():
         for j in itertools.combinations(prime_graph[prime], 4):
             if graph.is_connect(prime_graph, j):
                 return sum(list(j) + [prime])
+
+
+def problem_61():
+    """
+    Cyclical figurate numbers
+    循环的多边形数
+    """
+    test_func = [_int.is_triangle,
+                 _int.is_square,
+                 _int.is_pentagon,
+                 _int.is_hexagon,
+                 _int.is_heptagon,
+                 _int.is_octagon
+                 ]
+
+    def rec_test(test_num, _func):
+        """递归判断
+        """
+        if not test_num:
+            return True
+        num = test_num.pop(0)
+        for func in _func:
+            if func(num):
+                _func.remove(func)
+                return rec_test(test_num, _func)
+        return False
+
+    test = []
+    numbers = range(10, 100)
+
+    for i in itertools.combinations(numbers, 2):
+        num = int(''.join(str(j) for j in i))
+        if any([func(num) for func in test_func]):
+            test.append(i)
+        num2 = int(''.join(str(j) for j in i[::-1]))
+        if any([func(num2) for func in test_func]):
+            test.append(i[::-1])
+    _graph = {}
+    for i in test:
+        if i[0] in _graph:
+            _graph[i[0]].append(i[1])
+        else:
+            _graph[i[0]] = [i[1]]
+
+    def find_path(_graph, start, path=[]):
+        path = path + [start]
+        if len(path) > 6:
+            return []
+        if len(path) > 5 and path[0] in _graph[start]:
+            return [path]
+        if start not in _graph:
+            return []
+        paths = []
+        for node in _graph[start]:
+            if node not in path:
+                newpaths = find_path(_graph, node, path)
+                for newpath in newpaths:
+                    paths.append(newpath)
+        return paths
+    for i in _graph:
+        paths = find_path(_graph, i)
+        for path in paths:
+            num = [int(str(path[i]) + str(path[i + 1])) for i in range(5)]
+            num.append(int(str(path[-1]) + str(path[0])))
+            if rec_test([i for i in num], [i for i in test_func]):
+                return sum(num)
 
 
 def problem_65():

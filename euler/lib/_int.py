@@ -159,6 +159,13 @@ def triangle(num):
     return num * (num + 1) / 2
 
 
+def square(num):
+    """
+    正方形数
+    """
+    return num * num
+
+
 def pentagon(num):
     """
     五边形数
@@ -173,11 +180,33 @@ def hexagon(num):
     return num * (2 * num - 1)
 
 
+def heptagon(num):
+    """
+    七边型数
+    """
+    return num * (5 * num - 3) / 2
+
+
+def octagon(num):
+    """
+    八边型数
+    """
+    return num * (3 * num - 2)
+
+
 def is_triangle(num):
     """
     判断三角形数
     """
     solution = (-1 + math.sqrt((1 + 8 * num))) / 2.0
+    return int(solution) == solution
+
+
+def is_square(num):
+    """
+    判断正方形数
+    """
+    solution = math.sqrt(num)
     return int(solution) == solution
 
 
@@ -194,4 +223,20 @@ def is_hexagon(num):
     判断六边形数
     """
     solution = (1 + math.sqrt(1 + 8 * num)) / 4.0
+    return int(solution) == solution
+
+
+def is_heptagon(num):
+    """
+    判断七边型数
+    """
+    solution = (3 + math.sqrt(9 + 40 * num)) / 10.0
+    return int(solution) == solution
+
+
+def is_octagon(num):
+    """
+    判断八边型数
+    """
+    solution = (2 + math.sqrt(4 + 12 * num)) / 6.0
     return int(solution) == solution
