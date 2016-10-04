@@ -232,6 +232,23 @@ def problem_61():
                 return sum(num)
 
 
+def problem_62():
+    """
+    Cubic permutations
+    立方数重排
+    """
+    cubic_map = {}
+    for i in itertools.count(1):
+        cubic = ''.join(sorted(str(i ** 3)))
+        if cubic in cubic_map:
+            cubic_map[cubic].append(i)
+        else:
+            cubic_map[cubic] = [i]
+        if len(cubic_map[cubic]) == 5:
+            LOG.debug(cubic_map[cubic])
+            return min(cubic_map[cubic]) ** 3
+
+
 def problem_65():
     l_t=[2]+[1]*99
     if (len(l_t)-1)%3==2:
