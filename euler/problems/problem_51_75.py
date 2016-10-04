@@ -266,6 +266,24 @@ def problem_63():
         count += 10 - start
 
 
+def problem_64():
+    """
+    Odd period square roots
+    奇周期平方根
+    同类问题：
+    """
+    def process(start, end, num, path=[]):
+        path.append(start)
+        if num == end:
+            return path
+        num[0] = num[1] - num ** 2
+        if num[0] < num[1]:
+            pass
+        else:
+            num[0] = num % num[0]
+        return process(start, end, num, path)
+
+
 def problem_65():
     l_t=[2]+[1]*99
     if (len(l_t)-1)%3==2:
