@@ -107,26 +107,29 @@ def find_farthest_path(graph, start, end, path=[]):
     return farthest
 
 
-def find_ring_path(graph, start, path=[]):
+def find_ring_path(graph, start, path=[], max_path=3):
     """查找最长环路径
     """
     path = path + [start]
-
-    if len(path) >= 2 and path[-1] == start:
-        return path
+    if len(path) > max_path:
+        return []
+    if len(path) > max_path - 1 and path[0] in graph[start]:
+        return [path]
     if start not in graph:
         return []
     paths = []
     for node in graph[start]:
         if node not in path:
-            print 'ring', node, path
-            newpaths = find_ring_path(graph, node, path)
+            newpaths = find_ring_path(graph, node, path, max_path)
             for newpath in newpaths:
                 paths.append(newpath)
     return paths
 
 
 def is_connect(graph, nodes):
+    """
+    查找连接度
+    """
     for start, end in itertools.combinations(nodes, 2):
         if start not in graph[end]:
             return False
