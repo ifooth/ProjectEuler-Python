@@ -249,6 +249,23 @@ def problem_62():
             return min(cubic_map[cubic]) ** 3
 
 
+def problem_63():
+    """
+    Powerful digit counts
+    幂次与位数
+    关键是无限接近于10，到10后就不满足条件了
+    """
+    count = 0
+    for n in itertools.count(1):
+        start = (10 ** (n - 1)) ** (1.0 / n)
+        start = int(math.ceil(start))
+        # end = (10 ** n - 1) ** (1.0 / n)
+        # end = int(math.floor(end))
+        if start == 10:
+            return count
+        count += 10 - start
+
+
 def problem_65():
     l_t=[2]+[1]*99
     if (len(l_t)-1)%3==2:
