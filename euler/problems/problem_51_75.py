@@ -9,6 +9,7 @@ import fractions
 from euler.lib import data
 from euler.lib import _int
 from euler.lib import calc
+from euler.lib import graph
 
 
 LOG = logging.getLogger(__name__)
@@ -161,35 +162,27 @@ def problem_59():
     return sum([ord(i) for i in texts[0]])
 
 
-def encipher(texts,key):
-    #log.info(texts)
-    #log.info(key)
-    ciphertext = []
-    a,b = divmod(len(texts),len(key))
-    for i in range(a):
-        ciphertext += [ord(texts[i*len(key)+j])^ord(key[j]) for j in range(len(key))]
-    if b:
-        ciphertext += [ord(texts[a*len(key)+j])^ord(key[j]) for j in range(b)]
-    return ciphertext
-
-
-
-
 def problem_62():
-    l_lis=[]
-    for i in range(1,20000):
-        l_lis.append(i**3)
-    #l_lis=set(l_lis)
-    l_result=[0,0,0,0,0]
-    for m in l_lis:
-        n=0
-        for j in l_lis:
-            if sorted(str(m))==sorted(str(j)):
-                l_result[n]=j
-                n+=1
-                if n==5:
-                    print(l_result)
-                    return m
+    """
+    Prime pair sets
+    素数对的集合
+    """
+    prime_graph = {}
+    for prime in _int.prime_sieve():
+        prime_graph[prime] = []
+        for i in prime_graph.keys():
+            if (_int.is_prime(int(str(i) + str(prime))) and
+                    _int.is_prime(int(str(prime) + str(i)))):
+
+                # 组成无向图
+                prime_graph[i].append(prime)
+                prime_graph[prime].append(i)
+
+        for j in itertools.combinations(prime_graph[prime], 4):
+            if graph.is_connect(prime_graph, j):
+                return sum(list(j) + [prime])
+
+
 def problem_65():
     l_t=[2]+[1]*99
     if (len(l_t)-1)%3==2:
