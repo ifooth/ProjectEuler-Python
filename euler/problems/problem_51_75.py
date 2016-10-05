@@ -308,6 +308,25 @@ def problem_65():
     print(i_sum)
 
 
+def problem_66():
+    """
+    Diophantine equation
+    丢番图方程
+    """
+    max_x = 0
+    for d in range(2, 1001):
+        _sqrt = math.sqrt(d)
+        if _sqrt == int(_sqrt):
+            continue
+        for y in itertools.count(2):
+            x = math.sqrt(y ** 2 * d + 1)
+            if int(x) == x:
+                print x, d, y
+                max_x = max(x, max_x)
+                break
+    return max_x
+
+
 def problem_67():
     """
     Maximum path sum II
@@ -315,7 +334,7 @@ def problem_67():
     """
     binary_tree = list(
         map(int, i.split())
-        for i in data.openfile('p067_triangle.txt').strip().splitlines())
+        for i in data.get_file('p067_triangle.txt').strip().splitlines())
 
     def helper(tree, leaf):
         LOG.debug(leaf)
@@ -332,6 +351,18 @@ def problem_67():
 
     leaf = binary_tree.pop(-1)
     return helper(binary_tree, leaf)[0]
+
+
+def problem_68():
+    """
+    Magic 5-gon ring
+    魔力五边形环
+    """
+    # 直接用纸和笔算出
+    # 1，计算最小值(里面是12345）和最大值(里面是678910) 得出 14 <= x <= 21
+    # 2，想要的最大值，则678910应该在外面,从6开始
+    # 3，10要凑14，必须是1,3，如下
+    return '6531031914842725'
 
 
 def problem_70():
