@@ -405,16 +405,32 @@ def problem_70():
 
 
 def problem_71():
-    a=[1,1]
-    limit=1000000
-    i=limit-1
-    j=limit//7*3
-    while a!=[j,i]:
-        if a[0]/a[1]<3/7:
-            a[0]+=1
+    """
+    Ordered fractions
+    有序分数
+    """
+    limit = 3 * 1.0 / 7
+    min_fraction = [1, 0, 0]
+    n, d = 1, 2
+    while d <= 1000000:
+        r = n * 1.0 / d
+        if r < limit:
+            if limit - r < min_fraction[0]:
+                min_fraction = limit - r, n, d
+            n += 1
         else:
-            a[1]+=1
-    return a[0]-1
+            d += 1
+    return min_fraction[1]
+
+
+
+    while a != [j, i]:
+        if a[0] / a[1] < 3 / 7:
+            a[0] += 1
+        else:
+            a[1] += 1
+    return a[0] - 1
+
 
 def problem_74():
     i_result=0
