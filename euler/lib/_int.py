@@ -126,11 +126,16 @@ def phi(num):
     """在小于n的数中，与n互质的数的数目为欧拉函数
     """
     _factors = factors(num)
+    result = 1
     # 欧拉函数计算从2开始
     _factors.pop(1)
-    return functools.reduce(
-        operator.mul,
-        map(lambda x: x[0] ** (x[1] - 1) * (x[0] - 1), _factors.items()))
+    for prime, power in _factors.items():
+        result *= prime ** (power - 1) * (prime - 1)
+    return result
+    # 使用函数式写法
+    # return functools.reduce(
+    #     operator.mul,
+    #     map(lambda x: x[0] ** (x[1] - 1) * (x[0] - 1), _factors.items()))
 
 
 def prime_sieve():

@@ -423,13 +423,14 @@ def problem_71():
     return min_fraction[1]
 
 
+def problem_72():
+    """
+    Counting fractions
+    分数计数
+    就是计算欧拉函数PHI
+    """
+    return sum(_int.phi(i) for i in range(2, 1000001))
 
-    while a != [j, i]:
-        if a[0] / a[1] < 3 / 7:
-            a[0] += 1
-        else:
-            a[1] += 1
-    return a[0] - 1
 
 
 def problem_74():
