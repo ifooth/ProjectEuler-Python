@@ -365,6 +365,20 @@ def problem_68():
     return '6531031914842725'
 
 
+def problem_69():
+    """
+    Totient maximum
+    欧拉总计函数与最大值
+    """
+    maximum = [0, 0]
+    for i in range(2, 1000001):
+        phi = i * 1.0 / _int.phi(i)
+        if phi > maximum[0]:
+            maximum[0] = phi
+            maximum[1] = i
+    return maximum[1]
+
+
 def problem_70():
     """
     Totient permutation
