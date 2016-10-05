@@ -157,3 +157,12 @@ class Poker(object):
             if score != 0:
                 return score
         return 0
+
+
+def gcd(a, b):
+    """
+    Greatest common divisor
+    最大公约数
+    算法：辗转相除法
+    """
+    return gcd(b, a % b) if a % b else b

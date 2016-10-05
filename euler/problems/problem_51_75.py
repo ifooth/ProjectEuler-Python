@@ -432,6 +432,23 @@ def problem_72():
     return sum(_int.phi(i) for i in range(2, 1000001))
 
 
+def problem_73():
+    """
+    Counting fractions in a range
+    分数有范围计数
+    算法同71题
+    """
+    fractions_count = 0
+    for n in itertools.count(1):
+        start = 2 * n + 1
+        if start > 12000:
+            return fractions_count
+        for d in range(start, 3 * n):
+            if d > 12000:
+                continue
+            if calc.gcd(n, d) == 1:
+                fractions_count += 1
+
 
 def problem_74():
     i_result=0
