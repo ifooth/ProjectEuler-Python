@@ -466,3 +466,35 @@ def problem_74():
                 continue
             return visited
     return len([1 for i in range(1, 1000000) if len(chain(i)) == 60])
+
+
+def problem_75():
+    """
+    Singular integer right triangles
+    唯一的整数边直角三角形
+    分析：
+    1，最长边必须小于0.5周长，
+    2，周长必须是偶数
+    3, 第一个数是奇数，后面2个数必由一个是奇数
+    """
+    def triangles(perimeter):
+        result = False
+        end = int(math.floor(perimeter * 1.0 / 2))
+        for a in range(1, end):
+            for b in range(max(end - a, a + 1), end):
+                c = perimeter - a - b
+                if a ** 2 + b ** 2 == c ** 2:
+                    if not result:
+                        result = True
+                    else:
+                        return False
+                    # yield (a, b, c)
+        return result
+
+    def test():
+        for perimeter in range(12, 150, 2):
+            right = [i for i in triangles(perimeter)]
+            if right:
+                print perimeter, right
+    # test()
+    return len([1 for i in range(12, 1500, 2) if triangles(i)])
