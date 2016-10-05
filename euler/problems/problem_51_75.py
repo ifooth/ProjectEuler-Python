@@ -451,29 +451,18 @@ def problem_73():
 
 
 def problem_74():
-    i_result=0
-    fac_temp=[1,1,2,6,24,120,720,5040,40320,362880]
-    for i in range(1,1000000):
-        n=0
-        i_sum=i
-        s_set=set()
-        s_set.add(i)
-        while n<59:
-            #temp=str(i_sum)
-            i_sum=sum(fac_temp[int(j)] for j in str(i_sum))
-            #for j in temp:
-            #    i_sum+=fac_temp[int(j)]
-            if i_sum in s_set:break
-            else:s_set.add(i_sum)
-            #s_set.add(i_sum)
-            n+=1
-        #if len(s_set)==60:
-        #    i_result+=1
-        else:i_result+=1
-    return i_result
+    """
+    Digit factorial chains
+    数字阶乘链
+    """
+    factorials = [math.factorial(i) for i in range(10)]
 
-
-
-
-
-
+    def chain(num):
+        visited = [num]
+        while True:
+            num = sum(factorials[int(i)] for i in str(num))
+            if num not in visited:
+                visited.append(num)
+                continue
+            return visited
+    return len([1 for i in range(1, 1000000) if len(chain(i)) == 60])
