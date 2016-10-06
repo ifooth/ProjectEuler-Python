@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
+import fractions
 import itertools
 import logging
 import math
-import fractions
 
-from euler.lib import data
 from euler.lib import _int
 from euler.lib import calc
+from euler.lib import data
 from euler.lib import graph
 
 
@@ -20,7 +20,6 @@ def problem_51():
     Prime digit replacements
     素数数字替换
     """
-    count = 6
     primes = []
     prime_length = 2
 
@@ -285,26 +284,26 @@ def problem_64():
 
 
 def problem_65():
-    l_t=[2]+[1]*99
-    if (len(l_t)-1)%3==2:
-        l_t[2::3]=[i*2 for i in range(1,(len(l_t)-1)//3+2)]
+    l_t = [2] + [1] * 99
+    if (len(l_t) - 1) % 3 == 2:
+        l_t[2::3] = [i * 2 for i in range(1, (len(l_t) - 1) // 3 + 2)]
     else:
-        l_t[2::3]=[i*2 for i in range(1,(len(l_t)-1)//3+1)]
-    #print(l_t)
+        l_t[2::3] = [i * 2 for i in range(1, (len(l_t) - 1) // 3 + 1)]
+    # print(l_t)
     l_t.reverse()
-    l_result=[1,l_t[0]]
+    l_result = [1, l_t[0]]
     del l_t[0]
-    #print(l_result)
+    # print(l_result)
 
     for i in l_t:
-        l_result[0]=i*l_result[1]+l_result[0]
+        l_result[0] = i * l_result[1] + l_result[0]
         l_result.reverse()
-        #print(l_result)
+        # print(l_result)
     l_result.reverse()
     print(l_result)
-    i_sum=0
+    i_sum = 0
     for i in str(l_result[0]):
-        i_sum+=int(i)
+        i_sum += int(i)
     print(i_sum)
 
 
@@ -390,7 +389,8 @@ def problem_70():
     """
     min_result = 10000000
     min_num = 0
-    primes = [i for i in itertools.takewhile(lambda x: x <= 5000, _int.prime_sieve()) if i > 2000]
+    primes = [i for i in itertools.takewhile(
+        lambda x: x <= 5000, _int.prime_sieve()) if i > 2000]
     for i in itertools.combinations(primes, 2):
         num = i[0] * i[1]
         if num > 10000000:
