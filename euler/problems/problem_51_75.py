@@ -476,25 +476,35 @@ def problem_75():
     1，最长边必须小于0.5周长，
     2，周长必须是偶数
     3, 第一个数是奇数，后面2个数必由一个是奇数
+    勾股定理2个形式
+    a^2 + b^2 = c^2
+    a = k(m^2 + n^2)
+    b = 2kmn
+    c = k(m^2 - n^2)
     """
-    def triangles(perimeter):
-        result = False
-        end = int(math.floor(perimeter * 1.0 / 2))
-        for a in range(1, end):
-            for b in range(max(end - a, a + 1), end):
-                c = perimeter - a - b
-                if a ** 2 + b ** 2 == c ** 2:
-                    if not result:
-                        result = True
-                    else:
-                        return False
-                    # yield (a, b, c)
-        return result
+    def petty_tri(triangles):
+        for k, v in sorted(triangles.items()):
+            print k, v
 
-    def test():
-        for perimeter in range(12, 150, 2):
-            right = [i for i in triangles(perimeter)]
-            if right:
-                print perimeter, right
-    # test()
-    return len([1 for i in range(12, 1500, 2) if triangles(i)])
+    triangles = {}
+    perimeter = 1500000
+    for n in itertools.count(1):
+        end = math.floor(perimeter / 2.0) - n ** 2
+        if end < 0:
+            return len([1 for i in triangles.values() if len(i) == 1])
+        for m in range(n + 1, int(math.floor(math.sqrt(end)))):
+            if (m + n) % 2 != 1 or calc.gcd(m, n) != 1:
+                continue
+            a = m ** 2 - n ** 2
+            b = 2 * m * n
+            c = m ** 2 + n ** 2
+            p = a + b + c
+            i = 1
+            s = p * i
+            while s < perimeter:
+                if s in triangles:
+                    triangles[s].append((a * i, b * i, c * i))
+                else:
+                    triangles[s] = [(a * i, b * i, c * i)]
+                i += 1
+                s = p * i
