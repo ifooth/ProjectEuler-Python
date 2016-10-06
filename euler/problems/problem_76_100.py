@@ -1,24 +1,56 @@
-'''
-Created on Jun 7, 2012
-
-@author: Joe Lei
-'''
-
+# -*- coding: utf-8 -*-
+# Copyright 2016 IFOOTH
+# Author: Joe Lei <thezero12@hotmail.com>
 import decimal
 import logging
 from collections import OrderedDict
 
-from euler.lib import *
+from euler.lib import _int
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
+
+
+def problem_76():
+    """
+    Counting summations
+    加和计数
+    算法：动态规划，背包问题(Knapsack problem),类似31题
+    """
+    target = 100
+    coins = range(1, 100)
+    ways = [1] + [0] * target
+    for coin in coins:
+        for i in range(coin, target + 1):
+            ways[i] += ways[i - coin]
+    return ways[target]
+
+
+def problem_77():
+    """
+    Prime summations
+    素数加和
+    算法：动态规划，背包问题(Knapsack problem),类似31, 76题
+    """
+    primes = []
+    target = 10
+    for prime in _int.prime_sieve():
+        if prime > target:
+            return
+        primes.append(prime)
+        ways = [0] + [0] * target
+        print primes
+        for coin in primes:
+            for i in range(coin, target + 1):
+                ways[i] += ways[i - coin]
+        print ways[target]
 
 
 def problem_79():
     mydata=[i.strip() for i in data.openfile('keylog.txt')]
-    key=mydata[0]          
-    
+    key=mydata[0]
+
 def problem_80():
-    decimal.getcontext().prec=102    
+    decimal.getcontext().prec=102
     i_sum=0
     l_temp=set(i*i for i in range(1,10))
     for i in filter(lambda x:x not in l_temp,range(2,100)):
@@ -36,7 +68,7 @@ def problem_89():
     log.info(n)
     log.info(roman2num(n))
     log.info(num2roman(roman2num(n)))
-    return roman_len_new - roman_len    
+    return roman_len_new - roman_len
 
 def roman2num(roman):
     roman_chars = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
@@ -52,9 +84,9 @@ def num2roman(num):
         result += r*a
     return result
 
-        
-        
-def problem_92():    
+
+
+def problem_92():
     s_set=set()
     for i in range(2,10000000):
         temp=i
@@ -63,17 +95,17 @@ def problem_92():
             temp=sum(int(j)**2 for j in str(temp))
             if temp==1:break
             elif temp not in s_temp:s_temp.add(temp)
-            else:break            
+            else:break
         else:
             s_set.update(s_temp)
     return len(s_set)
 def problem_95():
-    i_result=[0,0]    
+    i_result=[0,0]
     for i in range(220,1000):
         temp=ext.XInt(i).sumOfDivisors()
         n=1
         if temp==1:continue
-        while i!=temp:            
+        while i!=temp:
             temp=ext.XInt(temp).sumOfDivisors
             n+=1
             if temp==1 or temp>1000:break
