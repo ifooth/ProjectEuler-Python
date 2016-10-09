@@ -116,10 +116,8 @@ def fibonacci_generator(fib_1=1, fib_2=1):
     yield fib_2
 
     while True:
-        fib_n = fib_1 + fib_2
-        fib_1 = fib_2
-        fib_2 = fib_n
-        yield fib_n
+        fib_1, fib_2 = fib_2, fib_1 + fib_2
+        yield fib_2
 
 
 def phi(num):
