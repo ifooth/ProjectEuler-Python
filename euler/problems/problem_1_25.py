@@ -293,6 +293,7 @@ def problem_18():
     Maximum path sum I
     最大路径和 I
     关键字：动态规划，递归，至底向上消俄罗斯方块
+    参考问题81
     """
     binary_tree = list(map(int, i.split())
                        for i in data.problem18.strip().splitlines())

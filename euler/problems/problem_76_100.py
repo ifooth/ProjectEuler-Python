@@ -65,9 +65,10 @@ def problem_81():
     """
     Path sum: two ways
     路径和：两个方向
-    # 算法
-    # 先消掉最下面一行，最消掉最后一列
-    # 计算最后个数字
+    算法
+    先消掉最下面一行，最消掉最后一列
+    计算最后个数字
+    参考：18题
     """
     matrix = data.get_file('p081_matrix.txt').strip().splitlines()
     matrix = [[int(j) for j in i.split(',')] for i in matrix]
