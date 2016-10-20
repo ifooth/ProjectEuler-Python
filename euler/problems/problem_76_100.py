@@ -6,6 +6,7 @@ import logging
 from collections import OrderedDict
 
 from euler.lib import _int
+from euler.lib import data
 
 LOG = logging.getLogger(__name__)
 
@@ -58,6 +59,48 @@ def problem_80():
         i_sum+=sum(int(i) for i in str((decimal.Decimal(i).sqrt()*10**99))[0:100:1])
         #print(str((decimal.Decimal(i).sqrt()*10**99)))
     return i_sum
+
+
+def problem_81():
+    """
+    Path sum: two ways
+    路径和：两个方向
+    # 算法
+    # 先消掉最下面一行，最消掉最后一列
+    # 计算最后个数字
+    """
+    matrix = data.get_file('p081_matrix.txt').strip().splitlines()
+    matrix = [[int(j) for j in i.split(',')] for i in matrix]
+
+    def help_func(_data):
+        depth = len(_data)
+        if depth == 1:
+            return _data
+        # 计算下面倒数第二行最小值
+        row = depth - 2
+        for column in range(row, -1, -1):
+            _data[row][column] += min(_data[row + 1][column],
+                                      _data[row][column + 1])
+        # 计算右侧倒数第二列最小值
+        column = depth - 2
+        # 最下面一行上面已经计算，不能重复计算
+        for row in range(column - 1, -1, -1):
+            _data[row][column] += min(_data[row][column + 1],
+                                      _data[row + 1][column])
+        # 计算完毕，清空最外面一层，可以优化
+        _data = [[j for j in i[:depth - 1]] for i in _data[:depth - 1]]
+
+        return help_func(_data)
+
+    # 计算最外一层，初始值，消掉第一个数
+    depth = len(matrix) - 1
+    for i in range(depth, 0, -1):
+        matrix[depth][i - 1] += matrix[depth][i]
+        matrix[i - 1][depth] += matrix[i][depth]
+
+    _data = help_func(matrix)
+    return _data[0][0]
+
 
 def problem_89():
     roman_num = data.openfile('roman.txt').split('\n')
