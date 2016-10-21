@@ -11,8 +11,31 @@ import operator
 LOG = logging.getLogger(__name__)
 
 
+def prime_sieve():
+    """
+    素数生成器
+    算法：Sieve of Eratosthenes
+    根据性质：一个素数的各个倍数，是一个差为此素数本身的等差数列
+    """
+    composites = {}
+    for num in itertools.count(2):
+        prime = composites.pop(num, None)
+        if prime is None:
+            yield num  # num是一个素数
+            composites[num * num] = num
+            LOG.debug('%s, composites: %s', num, composites)
+        else:
+            composite = num + prime  # num是一个合数
+            while composite in composites:
+                composite += prime
+            composites[composite] = prime
+            LOG.debug('%s, composites: %s', num, composites)
+
+
 def is_prime(num):
     """素数检测法
+    Simple methods
+    https://en.wikipedia.org/wiki/Primality_test
     """
     if num < 2:
         return False
@@ -20,29 +43,11 @@ def is_prime(num):
         return False
     if num % 3 == 0 and num != 3:
         return False
-    if any((num % i) == 0 or (num % (i + 2)) == 0 for i in range(5, int(math.sqrt(num)) + 2, 6)):  # noqa
-        return False
+    # +2序列必须加1, int向上浮动1
+    for i in xrange(5, int(math.sqrt(num)) + 2, 6):
+        if num % i == 0 or num % (i + 2) == 0:
+            return False
     return True
-
-
-def is_palindromic(num):
-    """回文数 9009
-    """
-    _num = str(num)
-    return _num == _num[::-1]
-
-
-def is_pandigital(num, n=9):
-    """
-    Pandigital number
-    全数字
-    """
-    n_letters = '123456789'
-    str_num = str(num)
-    set_num = set(str_num)
-    if len(str_num) != len(set_num):
-        return False
-    return n_letters[:n] == ''.join(sorted(set_num))
 
 
 def factors_generator(num):
@@ -106,20 +111,6 @@ def proper_divisors(num):
     return divisors
 
 
-def fibonacci_generator(fib_1=1, fib_2=1):
-    """斐波那契数生成器
-    F1 = fib_1
-    F2 = fib_2
-    Fn = Fn−1 + Fn−2
-    """
-    yield fib_1
-    yield fib_2
-
-    while True:
-        fib_1, fib_2 = fib_2, fib_1 + fib_2
-        yield fib_2
-
-
 def phi(num):
     """在小于n的数中，与n互质的数的数目为欧拉函数
     """
@@ -136,25 +127,38 @@ def phi(num):
     #     map(lambda x: x[0] ** (x[1] - 1) * (x[0] - 1), _factors.items()))
 
 
-def prime_sieve():
+def fibonacci_generator(fib_1=1, fib_2=1):
+    """斐波那契数生成器
+    F1 = fib_1
+    F2 = fib_2
+    Fn = Fn−1 + Fn−2
     """
-    查找一个区间内的素数
-    算法：Sieve of Eratosthenes
-    根据性质：一个素数的各个倍数，是一个差为此素数本身的等差数列
+    yield fib_1
+    yield fib_2
+
+    while True:
+        fib_1, fib_2 = fib_2, fib_1 + fib_2
+        yield fib_2
+
+
+def is_palindromic(num):
+    """回文数 9009
     """
-    composites = {}
-    for num in itertools.count(2):
-        prime = composites.pop(num, None)
-        if prime is None:
-            yield num  # num是一个素数
-            composites[num * num] = num
-            LOG.debug('%s, composites: %s', num, composites)
-        else:
-            composite = num + prime  # num是一个合数
-            while composite in composites:
-                composite += prime
-            composites[composite] = prime
-            LOG.debug('%s, composites: %s', num, composites)
+    _num = str(num)
+    return _num == _num[::-1]
+
+
+def is_pandigital(num, n=9):
+    """
+    Pandigital number
+    全数字
+    """
+    n_letters = '123456789'
+    str_num = str(num)
+    set_num = set(str_num)
+    if len(str_num) != len(set_num):
+        return False
+    return n_letters[:n] == ''.join(sorted(set_num))
 
 
 def triangle(num):

@@ -157,15 +157,28 @@ def problem_92():
 
 
 def problem_95():
-    i_result=[0,0]
-    for i in range(220,1000):
-        temp=ext.XInt(i).sumOfDivisors()
-        n=1
-        if temp==1:continue
-        while i!=temp:
-            temp=ext.XInt(temp).sumOfDivisors
-            n+=1
-            if temp==1 or temp>1000:break
-        else:
-            if i_result[0]<n:i_result=[n,i]
-    return i_result
+    """
+    Amicable chains
+    亲和数链
+    参考21题
+    """
+    min_chains = [0, 0]
+    for num in range(12496, 12499):
+        chains = [num]
+        while True:
+            num = sum(_int.proper_divisors(num))
+            print num
+            if num == 1:
+                print chains[0]
+                break
+            if num not in chains:
+                chains.append(num)
+            elif num == chains[0] and len(chains) > min_chains[0]:
+                min_chains[0] = len(chains)
+                min_chains[1] = min(chains)
+                print chains[0], chains
+                break
+            else:
+                print chains[0]
+                break
+    return chains

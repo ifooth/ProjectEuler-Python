@@ -20,9 +20,7 @@ LOG = logging.getLogger(__file__)
 
 
 def run_timer(num):
-    #s = [i for i in _int.prime_sieve(30000)]
-    s = [i for i in itertools.takewhile(lambda x: x < 22, _int.prime_sieve2())]
-    print len(s), s[-1], s
+    i = [_int.is_prime(j) for j in range(1000000)]
 
 
 if __name__=="__main__":
