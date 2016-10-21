@@ -69,6 +69,13 @@ def problem_81():
     先消掉最下面一行，最消掉最后一列
     计算最后个数字
     参考：18题
+    进一步思考，可以转换成树结构，
+    往下为数的左节点，右为右节点，构造如下
+    1
+    4 2
+    7 5 3
+    8 6
+    9
     """
     matrix = data.get_file('p081_matrix.txt').strip().splitlines()
     matrix = [[int(j) for j in i.split(',')] for i in matrix]
@@ -129,20 +136,26 @@ def num2roman(num):
     return result
 
 
-
 def problem_92():
-    s_set=set()
-    for i in range(2,10000000):
-        temp=i
-        s_temp=set()
-        while temp!=89:
-            temp=sum(int(j)**2 for j in str(temp))
-            if temp==1:break
-            elif temp not in s_temp:s_temp.add(temp)
-            else:break
+    """
+    Square digit chains
+    平方数字链
+    """
+    chains = set()
+    for num in range(2, 10000000):
+        digit = num
+        while num != 89:
+            if num == 1:
+                break
+            num = sum(int(i) ** 2 for i in str(num))
+            if num in chains:
+                chains.add(digit)
+                break
         else:
-            s_set.update(s_temp)
-    return len(s_set)
+            chains.add(num)
+    return len(chains)
+
+
 def problem_95():
     i_result=[0,0]
     for i in range(220,1000):
