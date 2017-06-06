@@ -221,7 +221,7 @@ def problem_38():
     for i in range(9876, 9234, -1):
         num = str(i) + str(i * 2)
         if _int.is_pandigital(int(num)):
-            return num
+            return int(num)
 
 
 def problem_39():
@@ -390,7 +390,7 @@ def problem_48():
     Self powers
     自幂
     """
-    return str(sum(i ** i for i in range(1, 1001)))[-10:]
+    return int(str(sum(i ** i for i in range(1, 1001)))[-10:])
 
 
 def problem_49():
