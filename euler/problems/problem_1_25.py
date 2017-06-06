@@ -98,8 +98,8 @@ def problem_8():
     """
     num_str = map(int, ''.join(data.problem8.strip().splitlines()))
     return max(
-        functools.reduce(operator.mul, num_str[i:i + 5])
-        for i in range(len(num_str) - 4))
+        functools.reduce(operator.mul, num_str[i:i + 13])
+        for i in range(len(num_str) - 12))
 
 
 def problem_9():
