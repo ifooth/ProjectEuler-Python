@@ -190,7 +190,7 @@ def problem_13():
     Large sum
     大和
     """
-    return str(sum(map(int, data.problem13.strip().splitlines())))[:10]
+    return int(str(sum(map(int, data.problem13.strip().splitlines())))[:10])
 
 
 def problem_14():
@@ -362,12 +362,9 @@ def problem_23():
     Non-abundant sums
     并非盈数之和
     """
-    abundants = filter(
-        lambda x: sum(_int.proper_divisors(x)) > x, range(1, 28123))
-    abundant_sums = set(map(
-        lambda x: x[0] + x[1],
-        set(itertools.combinations_with_replacement(abundants, 2))))
-    return sum(filter(lambda x: x not in abundant_sums, range(1, 28123)))
+    abundants = filter(lambda x: sum(_int.proper_divisors(x)) > x, range(1, 28123))
+
+    return sum(i for i in range(1, 28124) if not any(i - a in abundants for a in abundants))
 
 
 def problem_24():
@@ -376,7 +373,7 @@ def problem_24():
     字典序排列
     """
     letters = '0123456789'
-    return ''.join(sorted(itertools.permutations(letters, 10))[1000000 - 1])
+    return int(''.join(sorted(itertools.permutations(letters, 10))[1000000 - 1]))
 
 
 def problem_25():
