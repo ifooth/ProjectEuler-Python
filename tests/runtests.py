@@ -2,6 +2,7 @@
 # Copyright 2017 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 import logging
+import os
 import os.path
 import sys
 import time
@@ -35,6 +36,13 @@ def init_test(test_case):
     for problem_name in sorted(loader.PROBLEM_FUNC, key=lambda x: int(x[8:])):
         p_id = int(problem_name[8:])
         p_func = loader.PROBLEM_FUNC[problem_name]
+
+        _range = os.environ.get('range')
+        if _range:
+            _range = map(int, _range.split(','))
+
+        if _range and p_id not in range(*_range):
+            continue
         try:
             result = loader.get_result(p_id)
         except:
