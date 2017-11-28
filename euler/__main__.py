@@ -22,14 +22,20 @@ def main():
     if name not in loader.PROBLEM_FUNC:
         LOG.error('not found %s' % name)
         sys.exit(1)
+
+    try:
+        answer = loader.get_result(args.problem[0])
+    except loader.ResultNotFound as error:
+        LOG.warning("problem %d %s.", args.problem[0], error)
+        answer = '--'
+
     start = time.time()
     try:
         result = loader.PROBLEM_FUNC[name]()
     except KeyboardInterrupt:
         result = 'Interrupted'
-    LOG.info(
-        '%s, use %.3f(s), euler: %s', result, time.time() - start,
-        loader.get_result(args.problem[0]))
+
+    LOG.info('%s, use %.3f(s), euler: %s', result, time.time() - start, answer)
 
 
 if __name__ == "__main__":

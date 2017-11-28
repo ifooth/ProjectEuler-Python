@@ -11,6 +11,10 @@ module_pattern = re.compile(r'^(?P<name>problem_\d+_\d+).py$')
 func_pattern = re.compile(r'^problem_(?P<p_id>\d+)$')
 
 
+class ResultNotFound(Exception):
+    pass
+
+
 def load_problems():
     """动态加载题目
     """
@@ -25,6 +29,7 @@ def load_problems():
                 lambda x: func_pattern.match(x[0]), all_members))
             problem_func.update(func)
     return problem_func
+
 
 PROBLEM_FUNC = load_problems()
 
@@ -46,6 +51,6 @@ def get_result(problem_id):
         if result:
             return int(result)
         else:
-            raise ValueError('have empty result')
+            raise ResultNotFound('have empty result')
     except IndexError:
-        raise ValueError('have no result')
+        raise ResultNotFound('have no result')

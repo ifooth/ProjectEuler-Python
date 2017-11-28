@@ -47,17 +47,24 @@ def problem_77():
 
 
 def problem_79():
-    mydata=[i.strip() for i in data.openfile('keylog.txt')]
-    key=mydata[0]
+    """
+    Passcode derivation
+    密码推断
+    """
+    mydata = [i.strip() for i in data.get_file('keylog.txt')]
+    key = mydata[0]
+    return key
+
 
 def problem_80():
-    decimal.getcontext().prec=102
-    i_sum=0
-    l_temp=set(i*i for i in range(1,10))
-    for i in filter(lambda x:x not in l_temp,range(2,100)):
-        if i in l_temp:continue
-        i_sum+=sum(int(i) for i in str((decimal.Decimal(i).sqrt()*10**99))[0:100:1])
-        #print(str((decimal.Decimal(i).sqrt()*10**99)))
+    decimal.getcontext().prec = 102
+    i_sum = 0
+    l_temp = set(i * i for i in range(1, 10))
+    for i in filter(lambda x: x not in l_temp, range(2, 100)):
+        if i in l_temp:
+            continue
+        i_sum += sum(int(i) for i in str((decimal.Decimal(i).sqrt() * 10**99))[0:100:1])
+        # print(str((decimal.Decimal(i).sqrt()*10**99)))
     return i_sum
 
 
@@ -121,18 +128,20 @@ def problem_89():
     log.info(num2roman(roman2num(n)))
     return roman_len_new - roman_len
 
+
 def roman2num(roman):
-    roman_chars = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+    roman_chars = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     return sum(roman_chars[i] for i in str(roman))
 
+
 def num2roman(num):
-    roman_chars = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
-    roman_chars = OrderedDict(sorted(roman_chars.items(),key=lambda x:x[1],reverse=True))
+    roman_chars = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    roman_chars = OrderedDict(sorted(roman_chars.items(), key=lambda x: x[1], reverse=True))
     result = ''
     for r in roman_chars:
-        a,b = divmod(num,roman_chars[r])
+        a, b = divmod(num, roman_chars[r])
         num = b
-        result += r*a
+        result += r * a
     return result
 
 
