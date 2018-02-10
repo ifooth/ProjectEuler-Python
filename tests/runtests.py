@@ -45,7 +45,7 @@ def init_test(test_case):
             continue
         try:
             result = loader.get_result(p_id)
-        except:
+        except Exception:
             continue
 
         test = test_generator(p_func, result)

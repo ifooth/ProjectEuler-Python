@@ -122,10 +122,6 @@ def problem_89():
     roman_len = sum(len(i) for i in roman_num)
     roman_new = [num2roman(roman2num(i)) for i in roman_num]
     roman_len_new = sum(len(i) for i in roman_new)
-    n = 'XIIIIII'
-    log.info(n)
-    log.info(roman2num(n))
-    log.info(num2roman(roman2num(n)))
     return roman_len_new - roman_len
 
 

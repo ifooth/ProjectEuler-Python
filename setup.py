@@ -20,7 +20,7 @@ setup(
     author_email='thezero12@hotmail.com',
     url='https://github.com/ifooth/ProjectEuler-Python',
     packages=['euler'],
-    classifiers = [
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
@@ -29,5 +29,5 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Topic :: Scientific/Engineering :: Mathematics',
-   ],
+    ],
 )
