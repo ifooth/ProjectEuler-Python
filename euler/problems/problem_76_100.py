@@ -5,8 +5,7 @@ import decimal
 import logging
 from collections import OrderedDict
 
-from euler.lib import _int
-from euler.lib import data
+from euler.lib import _int, data
 
 LOG = logging.getLogger(__name__)
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-import logging
 import itertools
+import logging
 
 from euler.lib import _int
 

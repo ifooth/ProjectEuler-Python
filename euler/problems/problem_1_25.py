@@ -8,9 +8,7 @@ import logging
 import math
 import operator
 
-from euler.lib import _int
-from euler.lib import data
-
+from euler.lib import _int, data
 
 LOG = logging.getLogger(__name__)
 

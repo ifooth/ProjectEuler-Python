@@ -1,11 +1,7 @@
-'''
-Created on Jun 9, 2012
-
-@author: Joe Lei
-'''
-from euler.lib import ext
-from euler.lib import data
-from euler.lib import util
+# -*- coding: utf-8 -*-
+# Copyright 2018 IFOOTH
+# Author: Joe Lei <thezero12@hotmail.com>
+from euler.lib import data, util
 
 
 def problem_111():

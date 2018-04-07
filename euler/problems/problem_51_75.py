@@ -6,11 +6,7 @@ import itertools
 import logging
 import math
 
-from euler.lib import _int
-from euler.lib import calc
-from euler.lib import data
-from euler.lib import graph
-
+from euler.lib import _int, calc, data, graph
 
 LOG = logging.getLogger(__name__)
 
