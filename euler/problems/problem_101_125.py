@@ -2,6 +2,7 @@
 # Copyright 2018 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 import logging
+import itertools
 
 from euler.lib import _int, data, util
 from pprint import pprint
@@ -10,36 +11,43 @@ logger = logging.getLogger(__name__)
 
 
 def problem_111():
-
-    def str2dict(num):
-        data = {}
-        for n in str(num):
-            data[n] = data.get(n, 0) + 1
-        return data
-
     data = {str(i): {'M': 0, 'N': 0, 'S': 0} for i in range(0, 10)}
     logger.debug(data)
 
-    k = 6
-    k_min, k_max = 10 ** (k - 1), 10 ** k
+    k = 7
+    # k_min, k_max = 10 ** (k - 1), 10 ** k
+    # cache = set()
+    # for i in _int.prime_sieve():
+    #     if i < k_min:
+    #         continue
+    #     if i > k_max:
+    #         break
+    #     cache.add(i)
 
-    for i in _int.prime_sieve():
-        if i < k_min:
+    for i in itertools.product('1023456789', repeat=k):
+        if '0' == i[0]:
             continue
-        if i > k_max:
-            break
-
-        num = str2dict(i)
-
+        n = int(''.join(i))
+        num = _int.letter_count(i)
+        is_prime = None
         for k, v in num.items():
             if data[k]['M'] < v:
+                if is_prime is None:
+                    is_prime = _int.is_prime(n)
+                if is_prime is False:
+                    break
+
                 data[k]['M'] = v
                 data[k]['N'] = 1
-                data[k]['S'] = i
+                data[k]['S'] = n
             elif data[k]['M'] == v:
+                if is_prime is None:
+                    is_prime = _int.is_prime(n)
+                if is_prime is False:
+                    break
+
                 data[k]['N'] += 1
-                data[k]['S'] += i
-        logger.debug(data)
+                data[k]['S'] += n
 
     pprint(data)
     s = sum(i['S'] for i in data.values())

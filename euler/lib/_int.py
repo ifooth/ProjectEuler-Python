@@ -127,6 +127,16 @@ def phi(num):
     #     map(lambda x: x[0] ** (x[1] - 1) * (x[0] - 1), _factors.items()))
 
 
+def letter_count(num):
+    """计算字母数量
+    num: 字符串
+    """
+    counter = {}
+    for n in num:
+        counter[n] = counter.get(n, 0) + 1
+    return counter
+
+
 def fibonacci_generator(fib_1=1, fib_2=1):
     """斐波那契数生成器
     F1 = fib_1
