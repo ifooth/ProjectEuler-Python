@@ -1,12 +1,49 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
-from euler.lib import data, util
+import logging
+
+from euler.lib import _int, data, util
+from pprint import pprint
+
+logger = logging.getLogger(__name__)
 
 
 def problem_111():
-    a = [i for i in ext.XInt(10000).sievePrime() if i > 1000]
-    return a
+
+    def str2dict(num):
+        data = {}
+        for n in str(num):
+            data[n] = data.get(n, 0) + 1
+        return data
+
+    data = {str(i): {'M': 0, 'N': 0, 'S': 0} for i in range(0, 10)}
+    logger.debug(data)
+
+    k = 6
+    k_min, k_max = 10 ** (k - 1), 10 ** k
+
+    for i in _int.prime_sieve():
+        if i < k_min:
+            continue
+        if i > k_max:
+            break
+
+        num = str2dict(i)
+
+        for k, v in num.items():
+            if data[k]['M'] < v:
+                data[k]['M'] = v
+                data[k]['N'] = 1
+                data[k]['S'] = i
+            elif data[k]['M'] == v:
+                data[k]['N'] += 1
+                data[k]['S'] += i
+        logger.debug(data)
+
+    pprint(data)
+    s = sum(i['S'] for i in data.values())
+    return s
 
 
 def problem_108():
