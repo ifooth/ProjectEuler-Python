@@ -8,7 +8,7 @@ import time
 
 from euler.utils import loader
 
-LOG = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -20,13 +20,13 @@ def main():
 
     name = 'problem_%s' % args.problem[0]
     if name not in loader.PROBLEM_FUNC:
-        LOG.error('not found %s' % name)
+        logger.error('not found %s' % name)
         sys.exit(1)
 
     try:
         answer = loader.get_result(args.problem[0])
     except loader.ResultNotFound as error:
-        LOG.warning("problem %d %s.", args.problem[0], error)
+        logger.warning("problem %d %s.", args.problem[0], error)
         answer = '--'
 
     start = time.time()
@@ -35,7 +35,7 @@ def main():
     except KeyboardInterrupt:
         result = 'Interrupted'
 
-    LOG.info('%s, use %.3f(s), euler: %s', result, time.time() - start, answer)
+    logger.info('%s, use %.3f(s), euler: %s', result, time.time() - start, answer)
 
 
 if __name__ == "__main__":
