@@ -94,7 +94,8 @@ def problem_8():
     Largest product in a series
     连续数字最大乘积
     """
-    num_str = map(int, ''.join(data.problem8.strip().splitlines()))
+    data_file = "problem_8.txt"
+    num_str = map(int, ''.join(data.get_file(data_file).strip().splitlines()))
     return max(
         functools.reduce(operator.mul, num_str[i:i + 13])
         for i in range(len(num_str) - 12))
@@ -124,10 +125,12 @@ def problem_11():
     Largest product in a grid
     方阵中的最大乘积
     """
+    data_file = "problem_11.txt"
+
     def max_row(row):
         return max(functools.reduce(
             operator.mul, row[i: i + 4]) for i in range(len(row) - 3))
-    grid = [map(int, i.split()) for i in data.problem11.strip().splitlines()]
+    grid = [map(int, i.split()) for i in data.get_file(data_file).strip().splitlines()]
     max_product = 0
     # 计算每行
     for row in grid:
@@ -188,7 +191,8 @@ def problem_13():
     Large sum
     大和
     """
-    return int(str(sum(map(int, data.problem13.strip().splitlines())))[:10])
+    data_file = "problem_13.txt"
+    return int(str(sum(map(int, data.get_file(data_file).strip().splitlines())))[:10])
 
 
 def problem_14():
@@ -293,8 +297,9 @@ def problem_18():
     关键字：动态规划，递归，至底向上消俄罗斯方块
     参考问题81
     """
+    data_file = "problem_18.txt"
     binary_tree = list(map(int, i.split())
-                       for i in data.problem18.strip().splitlines())
+                       for i in data.get_file(data_file).strip().splitlines())
 
     def helper(tree, leaf):
         LOG.debug(leaf)
