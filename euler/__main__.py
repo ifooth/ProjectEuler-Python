@@ -34,10 +34,18 @@ def main():
         result = "Interrupted"
 
     duration = time.time() - start
-    if duration < 1:
-        logger.info("%s, use %.3f(ms), euler: %s", result, duration * 1000, answer)
+    unit = "s"
+
+    if duration > 1:
+        pass
+    elif duration * 1000 > 1:
+        unit = "ms"
+        duration = duration * 1000
     else:
-        logger.info("%s, use %.3f(s), euler: %s", result, duration, answer)
+        unit = "ns"
+        duration = duration * 1000 * 1000
+
+    logger.info("%s, use %.3f(%s), euler: %s", result, duration, unit, answer)
 
 
 if __name__ == "__main__":
