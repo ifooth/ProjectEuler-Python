@@ -41,9 +41,12 @@ def main():
     elif duration * 1000 > 1:
         unit = "ms"
         duration = duration * 1000
+    elif duration * 1000 * 1000 > 1:
+        unit = "us"
+        duration = duration * 1000 * 1000
     else:
         unit = "ns"
-        duration = duration * 1000 * 1000
+        duration = duration * 1000 * 1000 * 1000
 
     logger.info("%s, use %.3f(%s), euler: %s", result, duration, unit, answer)
 
