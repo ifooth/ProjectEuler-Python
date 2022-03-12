@@ -31,3 +31,4 @@ MANIFEST
 *.cover
 *.vscode
 .DS_Store
+.envrc

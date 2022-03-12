@@ -12,30 +12,32 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='EulerProject problem launcher')
-    parser.add_argument('problem', metavar='id', type=int, nargs=1,
-                        help='run problem')
+    parser = argparse.ArgumentParser(description="EulerProject problem launcher")
+    parser.add_argument("problem", metavar="id", type=int, nargs=1, help="run problem")
     args = parser.parse_args()
 
-    name = 'problem_%s' % args.problem[0]
+    name = "problem_%s" % args.problem[0]
     if name not in loader.PROBLEM_FUNC:
-        logger.error('not found %s' % name)
+        logger.error("not found %s" % name)
         sys.exit(1)
 
     try:
         answer = loader.get_result(args.problem[0])
     except loader.ResultNotFound as error:
         logger.warning("problem %d %s.", args.problem[0], error)
-        answer = '--'
+        answer = "--"
 
     start = time.time()
     try:
         result = loader.PROBLEM_FUNC[name]()
     except KeyboardInterrupt:
-        result = 'Interrupted'
+        result = "Interrupted"
 
-    logger.info('%s, use %.3f(s), euler: %s', result, time.time() - start, answer)
+    duration = time.time() - start
+    if duration < 1:
+        logger.info("%s, use %.3f(ms), euler: %s", result, duration * 1000, answer)
+    else:
+        logger.info("%s, use %.3f(s), euler: %s", result, duration, answer)
 
 
 if __name__ == "__main__":
